@@ -1,21 +1,22 @@
 package bdd;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class ClientManager {
 
-    public void addClient(String brand, String firstname, String name, String siret, String adresse, String email) {
+    public void addClient(String firstname, String name, String phone, String adresse, String email, LocalDate birth_date) {
         BddManager bddManager = new BddManager();
         Connection Connection = bddManager.connection();
-        String sql_request = "INSERT INTO clients (brand, firstname, name, siret, adresse, mail) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql_request = "INSERT INTO clients (firstname, name, phone, adresse, mail, birth_date) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement pstmt = Connection.prepareStatement(sql_request);
-            pstmt.setString(1, brand);
-            pstmt.setString(2, firstname);
-            pstmt.setString(3, name);
-            pstmt.setString(4, siret);
-            pstmt.setString(5, adresse);
-            pstmt.setString(6, email);
+            pstmt.setString(1, firstname);
+            pstmt.setString(2, name);
+            pstmt.setString(3, phone);
+            pstmt.setString(4, adresse);
+            pstmt.setString(5, email);
+            pstmt.setDate(6, Date.valueOf(birth_date));
 
             pstmt.execute();
         } catch (SQLException e) {

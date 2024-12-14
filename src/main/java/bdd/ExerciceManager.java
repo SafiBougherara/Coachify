@@ -4,14 +4,15 @@ import java.sql.*;
 
 public class ExerciceManager {
 
-    public boolean addExercice(String name, double time) {
+    public boolean addExercice(String name, double time, int repExercice) {
         BddManager bddManager = new BddManager();
         Connection Connection = bddManager.connection();
-        String sql_request = "INSERT INTO exercices (name, time) VALUES (?, ?)";
+        String sql_request = "INSERT INTO exercices (name, time, répétitions) VALUES (?, ?, ?)";
         try {
             PreparedStatement pstmt = Connection.prepareStatement(sql_request);
             pstmt.setString(1, name);
             pstmt.setDouble(2, time);
+            pstmt.setInt(3, repExercice);
             return pstmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);

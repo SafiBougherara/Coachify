@@ -1,40 +1,64 @@
 package Models;
 
+import java.time.LocalDate;
+
 public class Client {
 
-    private String brand;
     private String name;
-    private String siret;
+    private String firstname;
+    private String phone;
     private String adresse;
     private String email;
     private int id;
+    private LocalDate birth_date;
 
-    public Client(int id, String brand, String name, String siret, String adresse, String email) {
+    public Client(int id, String firstname, String name, String phone, String adresse, String email, LocalDate birth_date) {
 
         this.id = id;
-        this.siret = siret;
+        this.phone = phone;
         this.adresse = adresse;
         this.email = email;
-        this.brand = brand;
         this.name = name;
+        this.firstname = firstname;
+        this.birth_date = birth_date;
     }
 
-    public String getName() {return name;}
+    public String getName() {return this.name;}
 
-    public String getPrice() {
-        return brand;
-    }
+    public String getFirstname() {return this.firstname;}
 
-    @Override
-    public String toString() {
-        return brand + " - " + name;
-    }
 
     public int getId() {
         return this.id;
     }
 
-    public String getBrand() {
-        return this.brand;
+
+    public String getPhone() {return this.phone;}
+
+    public LocalDate getDate() {return this.birth_date;}
+
+
+
+    public String getAdresse() {
+        return this.adresse;
     }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public LocalDate getBirth_date() {
+        return this.birth_date;
+    }
+
+
+
+
+
+
+    @Override
+    public String toString() {
+        return firstname + "  " + name + " | " + phone + " | " + email;
+    }
+
 }

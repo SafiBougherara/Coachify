@@ -14,19 +14,16 @@ import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import tools.Generator;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 
-import java.util.HashMap;
-import java.util.List;
-
-public class RecepterController {
+public class CoachifyController {
 
 
     //exercice
@@ -35,29 +32,28 @@ public class RecepterController {
     @FXML
     private TextField timeExercice;
 
+    @FXML
+    private TextField repExercice;
+
 
     //client
     @FXML
-    private TextField nameClient;
-    @FXML
-    private TextField brand;
-    @FXML
     private TextField firstname;
     @FXML
-    private TextField name;
+    private TextField lastname;
     @FXML
-    private TextField siret;
+    private TextField phone;
     @FXML
     private TextArea adresse;
     @FXML
     private TextField email;
+    @FXML
+    private DatePicker birth_date;
 
 
     //info_entreprise
     @FXML
-    private TextField brandE;
-    @FXML
-    private TextField siretE;
+    private TextField phoneE;
     @FXML
     private TextArea adresseE;
     @FXML
@@ -170,8 +166,9 @@ public class RecepterController {
     public void add_exercice(ActionEvent event){
         String exerciceName = this.nameExercice.getText();
         String timeInput = this.timeExercice.getText();
+        String repExerciceInput = this.repExercice.getText();
 
-        if (exerciceName.isEmpty() || timeInput.isEmpty()) {
+        if (exerciceName.isEmpty() || timeInput.isEmpty() || repExerciceInput.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setHeaderText(null);
@@ -180,8 +177,9 @@ public class RecepterController {
         } else {
             try {
                 double time = Double.parseDouble(timeInput);
+                int repExercice = Integer.parseInt(repExerciceInput);
                 ExerciceManager sm = new ExerciceManager();
-                if(sm.addExercice(exerciceName, time)){
+                if(sm.addExercice(exerciceName, time, repExercice)){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Erreur");
                     alert.setHeaderText(null);
@@ -216,8 +214,9 @@ public class RecepterController {
             while (rs.next()) {
                 String name = rs.getString("name");
                 double time = rs.getDouble("time");
+                int repExercice = rs.getInt("répétitions");
                 int id = rs.getInt("id");
-                Exercice exercice = new Exercice(name, time, id);
+                Exercice exercice = new Exercice(name, time, id, repExercice);
                 this.items.add(exercice);
             }
         } catch (SQLException e) {
@@ -230,14 +229,14 @@ public class RecepterController {
 
     @FXML
     public void add_client(ActionEvent event) throws SQLException {
-        String brand = this.brand.getText();
         String firstname = this.firstname.getText();
-        String name = this.name.getText();
-        String siret = this.siret.getText();
+        String lastname = this.lastname.getText();
+        String phone = this.phone.getText();
         String adresse = this.adresse.getText();
         String email = this.email.getText();
+        LocalDate birthdate = this.birth_date.getValue();
 
-        if (brand.isEmpty() || firstname.isEmpty() || name.isEmpty() || siret.isEmpty() || adresse.isEmpty() || email.isEmpty()) {
+        if (firstname.isEmpty() || lastname.isEmpty() || phone.isEmpty() || adresse.isEmpty() || email.isEmpty() || birthdate == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setHeaderText(null);
@@ -251,7 +250,7 @@ public class RecepterController {
             alert.showAndWait();
         } else {
             ClientManager cm = new ClientManager();
-            cm.addClient(brand, firstname, name, siret, adresse, email);
+            cm.addClient(firstname, lastname, phone, adresse, email, birthdate);
             this.loadClients();
         }
     }
@@ -260,7 +259,7 @@ public class RecepterController {
 
         Client client = (Client) clientList.getSelectionModel().getSelectedItem();
         if (client != null) {
-            System.out.println(client.getId());
+            System.out.println("numéro du client : " + client.getId());
             ClientManager cm = new ClientManager();
             cm.removeClient(client.getId());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -275,7 +274,7 @@ public class RecepterController {
 
         Exercice exercice = (Exercice) exerciceList.getSelectionModel().getSelectedItem();
         if (exercice != null) {
-            System.out.println(exercice.getId());
+            System.out.println("numéro de l'exercice : " + exercice.getId());
             ExerciceManager sm = new ExerciceManager();
             sm.removeExercice(exercice.getId());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -297,13 +296,14 @@ public class RecepterController {
 
 
             while (rs.next()) {
-                String name = rs.getString("name");
-                String brand = rs.getString("brand");
+                String lastname = rs.getString("name");
+                String firstname = rs.getString("firstname");
                 int id = rs.getInt("id");
-                String siret = rs.getString("siret");
+                String phone = rs.getString("phone");
                 String adresse = rs.getString("adresse");
                 String email = rs.getString("mail");
-                Client client = new Client(id, brand, name, siret, adresse, email);
+                LocalDate birthdate = rs.getDate("birth_date").toLocalDate();
+                Client client = new Client(id, firstname, lastname, phone, adresse, email, birthdate);
                 this.items2.add(client);
             }
         } catch (SQLException e) {
@@ -314,19 +314,17 @@ public class RecepterController {
     @FXML
     public void add_info_entreprise(ActionEvent event) {
         // Récupérer les valeurs des champs
-        String brand = brandE.getText();
-        String siret = siretE.getText();
+        String phone = phoneE.getText();
         String adresse = adresseE.getText();
         String email = emailE.getText();
 
         // Nouvelle entrée à ajouter (sans infosSupplementaires)
         Map<String, Object> newEntry = new HashMap<>();
-        newEntry.put("brand", brand);
-        newEntry.put("siret", siret);
+        newEntry.put("phone", phone);
         newEntry.put("adresse", adresse);
         newEntry.put("email", email);
 
-        if (brand.isEmpty() || siret.isEmpty() || adresse.isEmpty() || email.isEmpty()) {
+        if (phone.isEmpty() || adresse.isEmpty() || email.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setHeaderText(null);
@@ -381,7 +379,7 @@ public class RecepterController {
     public void generate_program_pdf() {
 
         Double time = Generator.SumAmmount(this.items3);
-        System.out.println(time);
+        System.out.println("temps total : " + time);
 
         if (time == 0.0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -396,7 +394,7 @@ public class RecepterController {
             Client client = (Client) clientChoice.getSelectionModel().getSelectedItem();
             int client_id = client.getId();
 
-            System.out.println(client_id);
+            System.out.println("numéro du programme : " + num_program + " et numero du client : " + client_id);
             fm.addProgram(num_program, status, time, client_id);
         }
     }
@@ -425,13 +423,12 @@ public class RecepterController {
             ObservableList<String> displayList = FXCollections.observableArrayList();
 
             for (Map<String, Object> entry : dataList) {
-                String brand = (String) entry.get("brand");
-                String siret = (String) entry.get("siret");
+                String phone = (String) entry.get("phone");
                 String adresse = (String) entry.get("adresse");
                 String email = (String) entry.get("email");
 
                 // Format des informations à afficher dans la ListView
-                String displayInfo = "Brand: " + brand + ", Siret: " + siret + ", Adresse: " + adresse + ", Email: " + email;
+                String displayInfo = "phone: " + phone + ", Adresse: " + adresse + ", Email: " + email;
                 displayList.add(displayInfo);
             }
 

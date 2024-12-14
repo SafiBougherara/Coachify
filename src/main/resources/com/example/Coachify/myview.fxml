@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight=" -Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Coachify.RecepterController">
+<TabPane maxHeight=" -Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Coachify.CoachifyController">
   <tabs>
     <Tab text="Clients">
       <content>
@@ -30,22 +30,20 @@
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="417.0">
                            <children>
-                              <Label layoutX="92.0" layoutY="113.0" text="Nom" />
-                              <TextField fx:id="name" layoutX="137.0" layoutY="109.0" prefHeight="26.0" prefWidth="357.0" />
-                              <Label layoutX="92.0" layoutY="153.0" text="Siret" />
-                              <TextField fx:id="siret" layoutX="133.0" layoutY="149.0" prefHeight="26.0" prefWidth="360.0" />
-                              <TextArea fx:id="adresse" layoutX="134.0" layoutY="220.0" prefHeight="47.0" prefWidth="359.0" />
-                              <Label layoutX="83.0" layoutY="236.0" text="Adresse" />
-                              <Label layoutX="91.0" layoutY="190.0" text="Email" />
-                              <TextField fx:id="email" layoutX="134.0" layoutY="186.0" prefHeight="26.0" prefWidth="359.0" />
+                              <Label layoutX="79.0" layoutY="113.0" text="Nom" />
+                              <TextField fx:id="lastname" layoutX="137.0" layoutY="108.0" prefHeight="26.0" prefWidth="357.0" />
+                              <Label layoutX="64.0" layoutY="153.0" text="Téléphone" />
+                              <TextField fx:id="phone" layoutX="136.0" layoutY="148.0" prefHeight="26.0" prefWidth="360.0" />
+                              <TextArea fx:id="adresse" layoutX="136.0" layoutY="220.0" prefHeight="47.0" prefWidth="359.0" />
+                              <Label layoutX="69.0" layoutY="235.0" text="Adresse" />
+                              <Label layoutX="76.0" layoutY="190.0" text="Email" />
+                              <TextField fx:id="email" layoutX="136.0" layoutY="185.0" prefHeight="26.0" prefWidth="359.0" />
                               <Button layoutX="132.0" layoutY="328.0" mnemonicParsing="false" onAction="#add_client" prefHeight="27.0" prefWidth="360.0" text="Ajouter un client" />
-                              <Label layoutX="89.0" layoutY="38.0" text="Brand" />
-                              <TextField fx:id="brand" layoutX="134.0" layoutY="34.0" prefHeight="26.0" prefWidth="360.0" />
-                              <Label layoutX="83.0" layoutY="74.0" text="Prénom" />
-                              <TextField fx:id="firstname" layoutX="136.0" layoutY="70.0" prefHeight="26.0" prefWidth="358.0" />
+                              <Label layoutX="70.0" layoutY="74.0" text="Prénom" />
+                              <TextField fx:id="firstname" layoutX="137.0" layoutY="69.0" prefHeight="26.0" prefWidth="358.0" />
                               <Button layoutX="9.0" layoutY="548.0" mnemonicParsing="false" onAction="#remove_selected_client" prefHeight="26.0" prefWidth="137.0" text="retirer le client choisi" />
-                              <DatePicker layoutX="188.0" layoutY="285.0" prefHeight="26.0" prefWidth="305.0" />
-                              <Label layoutX="77.0" layoutY="289.0" text="Date de naissance" />
+                              <DatePicker fx:id="birth_date" layoutX="136.0" layoutY="284.0" prefHeight="26.0" prefWidth="360.0" />
+                              <Label layoutX="31.0" layoutY="288.0" text="Date de naissance" />
                            </children>
                         </AnchorPane>
                     </items>
@@ -109,11 +107,13 @@
                                  </font>
                               </Label>
                               <TextField fx:id="nameExercice" layoutX="58.0" layoutY="110.0" prefHeight="26.0" prefWidth="360.0" />
-                              <Label layoutX="11.0" layoutY="172.0" text="Temps" />
-                              <TextField fx:id="timeExercice" layoutX="61.0" layoutY="168.0" prefHeight="26.0" prefWidth="358.0" />
+                              <Label layoutX="97.0" layoutY="149.0" text="Temps (en minutes)" />
+                              <TextField fx:id="timeExercice" layoutX="67.0" layoutY="171.0" prefHeight="26.0" prefWidth="162.0" />
                               <Button fx:id="addExercice" layoutX="429.0" layoutY="114.0" mnemonicParsing="false" onAction="#add_exercice" prefHeight="70.0" prefWidth="136.0" text="Ajouter un exercice" />
                               <Label layoutX="16.0" layoutY="114.0" text="Nom" />
                               <Button layoutX="11.0" layoutY="543.0" mnemonicParsing="false" onAction="#remove_selected_exercice" prefHeight="26.0" prefWidth="138.0" text="retirer l'exercice choisi" />
+                              <Label layoutX="300.0" layoutY="149.0" text="Répétitions" />
+                              <TextField fx:id="repExercice" layoutX="258.0" layoutY="171.0" prefHeight="26.0" prefWidth="159.0" />
                            </children>
                         </AnchorPane>
                      </items>
@@ -135,13 +135,11 @@
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="417.0">
                            <children>
-                              <Label layoutX="101.0" layoutY="150.0" text="Brand" />
-                              <TextField fx:id="brandE" layoutX="146.0" layoutY="146.0" prefHeight="26.0" prefWidth="360.0" />
-                              <Label layoutX="105.0" layoutY="191.0" text="Siret" />
-                              <TextField fx:id="siretE" layoutX="146.0" layoutY="187.0" prefHeight="26.0" prefWidth="360.0" />
+                              <Label layoutX="76.0" layoutY="191.0" text="Téléphone" />
+                              <TextField fx:id="phoneE" layoutX="146.0" layoutY="187.0" prefHeight="26.0" prefWidth="360.0" />
                               <TextArea fx:id="adresseE" layoutX="147.0" layoutY="258.0" prefHeight="47.0" prefWidth="359.0" />
-                              <Label layoutX="96.0" layoutY="274.0" text="Adresse" />
-                              <Label layoutX="104.0" layoutY="228.0" text="Email" />
+                              <Label layoutX="83.0" layoutY="273.0" text="Adresse" />
+                              <Label layoutX="90.0" layoutY="228.0" text="Email" />
                               <TextField fx:id="emailE" layoutX="147.0" layoutY="224.0" prefHeight="26.0" prefWidth="359.0" />
                               <Button layoutX="157.0" layoutY="329.0" mnemonicParsing="false" onAction="#add_info_entreprise" prefHeight="26.0" prefWidth="341.0" text="Modifier informations de l'entreprise" />
                               <Label alignment="CENTER" layoutX="177.0" layoutY="48.0" prefHeight="36.0" prefWidth="301.0" text="Information entreprise">

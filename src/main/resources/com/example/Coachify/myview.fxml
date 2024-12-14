@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight=" -Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Coachify.RecepterController">
+  <tabs>
+    <Tab text="Clients">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <SplitPane dividerPositions="0.4176236749116607" layoutX="-11.0" layoutY="-13.0" prefHeight="580.0" prefWidth="907.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <ListView fx:id="clientList" layoutX="10.0" layoutY="13.0" prefHeight="562.0" prefWidth="358.0" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="417.0">
+                           <children>
+                              <Label layoutX="92.0" layoutY="113.0" text="Nom" />
+                              <TextField fx:id="name" layoutX="137.0" layoutY="109.0" prefHeight="26.0" prefWidth="357.0" />
+                              <Label layoutX="92.0" layoutY="153.0" text="Siret" />
+                              <TextField fx:id="siret" layoutX="133.0" layoutY="149.0" prefHeight="26.0" prefWidth="360.0" />
+                              <TextArea fx:id="adresse" layoutX="134.0" layoutY="220.0" prefHeight="47.0" prefWidth="359.0" />
+                              <Label layoutX="83.0" layoutY="236.0" text="Adresse" />
+                              <Label layoutX="91.0" layoutY="190.0" text="Email" />
+                              <TextField fx:id="email" layoutX="134.0" layoutY="186.0" prefHeight="26.0" prefWidth="359.0" />
+                              <Button layoutX="132.0" layoutY="328.0" mnemonicParsing="false" onAction="#add_client" prefHeight="27.0" prefWidth="360.0" text="Ajouter un client" />
+                              <Label layoutX="89.0" layoutY="38.0" text="Brand" />
+                              <TextField fx:id="brand" layoutX="134.0" layoutY="34.0" prefHeight="26.0" prefWidth="360.0" />
+                              <Label layoutX="83.0" layoutY="74.0" text="Prénom" />
+                              <TextField fx:id="firstname" layoutX="136.0" layoutY="70.0" prefHeight="26.0" prefWidth="358.0" />
+                              <Button layoutX="9.0" layoutY="548.0" mnemonicParsing="false" onAction="#remove_selected_client" prefHeight="26.0" prefWidth="137.0" text="retirer le client choisi" />
+                              <DatePicker layoutX="188.0" layoutY="285.0" prefHeight="26.0" prefWidth="305.0" />
+                              <Label layoutX="77.0" layoutY="289.0" text="Date de naissance" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab onSelectionChanged="#load_client_program" text="Programmes">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <HBox layoutX="6.0" layoutY="-3.0" prefHeight="59.0" prefWidth="893.0" spacing="20.0">
+                     <children>
+                        <Label text="Clients" />
+                        <ChoiceBox fx:id="clientChoice" prefHeight="26.0" prefWidth="810.0" />
+                     </children>
+                     <padding>
+                        <Insets left="20.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <SplitPane dividerPositions="0.3985148514851485" layoutX="6.0" layoutY="59.0" prefHeight="507.0" prefWidth="890.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <ListView layoutY="1.0" prefHeight="503.0" prefWidth="348.0" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <Label fx:id="num_program" layoutX="194.0" layoutY="27.0" prefHeight="17.0" prefWidth="142.0" text="Numéro de programme" />
+                              <Label layoutX="44.0" layoutY="79.0" text="Exercices" />
+                              <ChoiceBox fx:id="exerciceChoice" layoutX="115.0" layoutY="74.0" prefHeight="26.0" prefWidth="383.0" />
+                              <Button layoutX="240.0" layoutY="119.0" mnemonicParsing="false" onAction="#add_exercice_on_recept" prefHeight="26.0" prefWidth="256.0" text="Ajouter l'exercice au programme" />
+                              <ListView fx:id="temp_exerciceList" layoutX="3.0" layoutY="274.0" prefHeight="230.0" prefWidth="524.0" />
+                              <Button layoutX="14.0" layoutY="239.0" mnemonicParsing="false" onAction="#generate_program_pdf" prefHeight="26.0" prefWidth="177.0" text="Génerer le programme (PDF)" />
+                              <Button layoutX="428.0" layoutY="239.0" mnemonicParsing="false" onAction="#clean_added_exercices" prefHeight="26.0" prefWidth="89.0" text="vider la liste" />
+                              <TextField fx:id="temp_sum" layoutX="368.0" layoutY="466.0" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Exercices">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <SplitPane dividerPositions="0.3602031802120141" layoutX="-11.0" layoutY="-13.0" prefHeight="580.0" prefWidth="907.0">
+                     <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <ListView fx:id="exerciceList" layoutX="10.0" layoutY="13.0" prefHeight="562.0" prefWidth="308.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="417.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="149.0" layoutY="25.0" prefHeight="36.0" prefWidth="301.0" text="Gestion des exercices">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="nameExercice" layoutX="58.0" layoutY="110.0" prefHeight="26.0" prefWidth="360.0" />
+                              <Label layoutX="11.0" layoutY="172.0" text="Temps" />
+                              <TextField fx:id="timeExercice" layoutX="61.0" layoutY="168.0" prefHeight="26.0" prefWidth="358.0" />
+                              <Button fx:id="addExercice" layoutX="429.0" layoutY="114.0" mnemonicParsing="false" onAction="#add_exercice" prefHeight="70.0" prefWidth="136.0" text="Ajouter un exercice" />
+                              <Label layoutX="16.0" layoutY="114.0" text="Nom" />
+                              <Button layoutX="11.0" layoutY="543.0" mnemonicParsing="false" onAction="#remove_selected_exercice" prefHeight="26.0" prefWidth="138.0" text="retirer l'exercice choisi" />
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="information entreprise">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <SplitPane dividerPositions="0.29797979797979796" layoutX="-11.0" layoutY="-13.0" prefHeight="580.0" prefWidth="907.0">
+                     <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <ListView fx:id="info_entreprise" layoutX="10.0" layoutY="13.0" prefHeight="562.0" prefWidth="253.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="417.0">
+                           <children>
+                              <Label layoutX="101.0" layoutY="150.0" text="Brand" />
+                              <TextField fx:id="brandE" layoutX="146.0" layoutY="146.0" prefHeight="26.0" prefWidth="360.0" />
+                              <Label layoutX="105.0" layoutY="191.0" text="Siret" />
+                              <TextField fx:id="siretE" layoutX="146.0" layoutY="187.0" prefHeight="26.0" prefWidth="360.0" />
+                              <TextArea fx:id="adresseE" layoutX="147.0" layoutY="258.0" prefHeight="47.0" prefWidth="359.0" />
+                              <Label layoutX="96.0" layoutY="274.0" text="Adresse" />
+                              <Label layoutX="104.0" layoutY="228.0" text="Email" />
+                              <TextField fx:id="emailE" layoutX="147.0" layoutY="224.0" prefHeight="26.0" prefWidth="359.0" />
+                              <Button layoutX="157.0" layoutY="329.0" mnemonicParsing="false" onAction="#add_info_entreprise" prefHeight="26.0" prefWidth="341.0" text="Modifier informations de l'entreprise" />
+                              <Label alignment="CENTER" layoutX="177.0" layoutY="48.0" prefHeight="36.0" prefWidth="301.0" text="Information entreprise">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>

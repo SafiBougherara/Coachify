@@ -2,6 +2,7 @@ package com.example.Coachify;
 
 import Models.Client;
 import Models.Program;
+import bdd.LoginManager;
 import bdd.ProgramManager;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -70,6 +71,12 @@ public class CoachifyController {
     @FXML
     private ChoiceBox exerciceChoice;
 
+    //utilisateur
+    @FXML
+    private TextField add_username;
+    @FXML
+    private TextField add_password;
+
     //lists
     @FXML
     private ListView exerciceList;
@@ -81,6 +88,8 @@ public class CoachifyController {
     private TextField temp_sum;
     @FXML
     private ListView programList;
+    @FXML
+    private ListView info_usersList;
 
     @FXML
     private ListView<String> info_entrepriseList;
@@ -470,6 +479,29 @@ public class CoachifyController {
             System.out.println("programme numéro " + num_program + " et client numero " + client_id);
             fm.addProgram(num_program, status, time, client_id);
             loadProgram();
+        }
+    }
+
+    public void add_user(ActionEvent event) {
+
+        String username = this.add_username.getText();
+        String password = this.add_password.getText();
+
+
+        if (username.isEmpty() || password.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez remplir tous les champs");
+            alert.showAndWait();
+        } else {
+            LoginManager loginManager = new LoginManager();
+            loginManager.addUser(username, password);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText(null);
+            alert.setContentText("Utilisateur ajouté avec succes");
+            alert.showAndWait();
         }
     }
 

@@ -27,35 +27,23 @@ public class LoggerController {
     @FXML
     private void switchToMyView(ActionEvent event) throws IOException {
 
-//        if (!checkconnection()) {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("Error");
-//            alert.setHeaderText(null);
-//            alert.setContentText("Wrong username or password");
-//            alert.showAndWait();
-//        }else {
-//            // Récupérer le Stage à partir de l'événement
-//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//
-//            // Charger le fichier myview.fxml
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("myview.fxml"));
-//            Scene scene = new Scene(loader.load(), 900, 600);
-//
-//            // Appliquer la nouvelle scène au Stage
-//            stage.setScene(scene);
-//        }
+        if (!checkconnection()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Wrong username or password");
+            alert.showAndWait();
+        }else {
+            // Récupérer le Stage à partir de l'événement
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
+            // Charger le fichier myview.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("myview.fxml"));
+            Scene scene = new Scene(loader.load(), 900, 600);
 
-
-        // Récupérer le Stage à partir de l'événement
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        // Charger le fichier myview.fxml
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("myview.fxml"));
-        Scene scene = new Scene(loader.load(), 900, 600);
-
-        // Appliquer la nouvelle scène au Stage
-        stage.setScene(scene);
+            // Appliquer la nouvelle scène au Stage
+            stage.setScene(scene);
+        }
     }
 
     public boolean checkconnection(){

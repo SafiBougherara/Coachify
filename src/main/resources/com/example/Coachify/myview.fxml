@@ -58,7 +58,8 @@
                   <HBox layoutX="6.0" layoutY="-3.0" prefHeight="59.0" prefWidth="893.0" spacing="20.0">
                      <children>
                         <Label text="Clients" />
-                        <ChoiceBox fx:id="clientChoice" prefHeight="26.0" prefWidth="810.0" />
+                        <ChoiceBox fx:id="clientChoice" prefHeight="26.0" prefWidth="742.0" />
+                        <Button mnemonicParsing="false" onAction="#refresh_program_list" prefHeight="26.0" prefWidth="39.0" text="OK" />
                      </children>
                      <padding>
                         <Insets left="20.0" top="10.0" />
@@ -68,7 +69,7 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <ListView layoutY="1.0" prefHeight="503.0" prefWidth="348.0" />
+                              <ListView fx:id="programList" layoutY="1.0" prefHeight="503.0" prefWidth="348.0" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -78,9 +79,10 @@
                               <ChoiceBox fx:id="exerciceChoice" layoutX="115.0" layoutY="74.0" prefHeight="26.0" prefWidth="383.0" />
                               <Button layoutX="240.0" layoutY="119.0" mnemonicParsing="false" onAction="#add_exercice_on_recept" prefHeight="26.0" prefWidth="256.0" text="Ajouter l'exercice au programme" />
                               <ListView fx:id="temp_exerciceList" layoutX="3.0" layoutY="274.0" prefHeight="230.0" prefWidth="524.0" />
-                              <Button layoutX="14.0" layoutY="239.0" mnemonicParsing="false" onAction="#generate_program_pdf" prefHeight="26.0" prefWidth="177.0" text="Génerer le programme (PDF)" />
+                              <Button layoutX="218.0" layoutY="239.0" mnemonicParsing="false" onAction="#generate_program_pdf" prefHeight="26.0" prefWidth="177.0" text="Génerer le programme" />
                               <Button layoutX="428.0" layoutY="239.0" mnemonicParsing="false" onAction="#clean_added_exercices" prefHeight="26.0" prefWidth="89.0" text="vider la liste" />
                               <TextField fx:id="temp_sum" layoutX="368.0" layoutY="466.0" />
+                              <Button layoutX="13.0" layoutY="239.0" mnemonicParsing="false" onAction="#remove_selected_program" prefHeight="26.0" prefWidth="165.0" text="Retirer le programme choisi" />
                            </children>
                         </AnchorPane>
                     </items>

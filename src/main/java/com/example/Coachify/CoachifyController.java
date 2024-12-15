@@ -1,6 +1,7 @@
 package com.example.Coachify;
 
 import Models.Client;
+import Models.Program;
 import bdd.ProgramManager;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -18,7 +19,6 @@ import java.time.LocalDate;
 import java.util.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import tools.Generator;
 
 import java.io.File;
 import java.io.IOException;
@@ -79,6 +79,8 @@ public class CoachifyController {
     private ListView clientList;
     @FXML
     private TextField temp_sum;
+    @FXML
+    private ListView programList;
 
     @FXML
     private ListView<String> info_entrepriseList;
@@ -87,6 +89,8 @@ public class CoachifyController {
     ObservableList<Exercice> items = FXCollections.observableArrayList();
     ObservableList<Client> items2 = FXCollections.observableArrayList();
     ObservableList<Exercice> items3 = FXCollections.observableArrayList();
+
+    ObservableList<Program> items4 = FXCollections.observableArrayList();
 
     @FXML
     public void initialize(){
@@ -101,6 +105,7 @@ public class CoachifyController {
         //charger les exercices initiaux (optionnel)
         loadExercices();
         loadClients();
+
         //load_info_entreprise();
     }
 
@@ -128,6 +133,7 @@ public class CoachifyController {
         }
         if (!clientChoice.getSelectionModel().isEmpty() && !exerciceChoice.getSelectionModel().isEmpty()) {
             return true;
+
         }else {
             return false;
         }
@@ -138,14 +144,13 @@ public class CoachifyController {
     public void load_client_program(Event e){
         loadClients();
         loadExercices();
+        programList.setItems(items4);
         clientChoice.setItems(items2);
         exerciceChoice.setItems(items);
     }
 
     @FXML
     public void add_exercice_on_recept(ActionEvent event){
-
-
 
         if (this.checkFieldsOnRecept()) {
             // on récupeère les valeurs de la choiceBox et on l'add dans item3
@@ -155,7 +160,7 @@ public class CoachifyController {
 
             // on l'add dans le listview temporaire
             temp_exerciceList.setItems(items3);
-            Double time = Generator.SumAmmount(this.items3);
+            Double time = items3.stream().mapToDouble(Exercice::getTime).sum();
             temp_sum.setText("total : " + time + " minutes");
         }
 
@@ -242,13 +247,29 @@ public class CoachifyController {
             alert.setHeaderText(null);
             alert.setContentText("Veuillez remplir tous les champs avec des informations valides");
             alert.showAndWait();
-        } else if (!email.matches("^(.+)@(.+)$")) {
+        }
+        else if (!email.matches("^(.+)@(.+)$")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setHeaderText(null);
             alert.setContentText("Veuillez entrer une adresse email valide");
             alert.showAndWait();
-        } else {
+        }
+        else if (!phone.matches("^(\\+33|0)[1-9]([-. ]?[0-9]{2}){4}$")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez entrer un numéro de téléphone valide");
+            alert.showAndWait();
+        }
+        else if (birthdate.isAfter(LocalDate.now())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez entrer une date de naissance valide");
+            alert.showAndWait();
+        }
+        else {
             ClientManager cm = new ClientManager();
             cm.addClient(firstname, lastname, phone, adresse, email, birthdate);
             this.loadClients();
@@ -286,6 +307,21 @@ public class CoachifyController {
         }
     }
 
+    public void remove_selected_program(ActionEvent event){
+
+        Program program = (Program) programList.getSelectionModel().getSelectedItem();
+        if (program != null) {
+            System.out.println("numéro du programme : " + program.getId());
+            ProgramManager pm = new ProgramManager();
+            pm.removeProgram(program.getId());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText(null);
+            alert.setContentText("Programme supprimé avec succes");
+            alert.showAndWait();
+            this.loadProgram();
+        }
+    }
 
     private void loadClients(){
         this.items2.clear();
@@ -311,6 +347,43 @@ public class CoachifyController {
         }
 
     }
+
+    @FXML
+    public void loadProgram() {
+        this.items4.clear();
+
+        try {
+            ProgramManager pm = new ProgramManager();
+            Client client = (Client) clientChoice.getSelectionModel().getSelectedItem();
+            int client_id = client.getId();
+            ResultSet rs = pm.getOneProgram(client_id);
+            while (rs.next()) {
+                int num_program = rs.getInt("num_program");
+                boolean status = rs.getBoolean("status");
+                double time = rs.getDouble("time");
+                int id = rs.getInt("id");
+                Program program = new Program(id, num_program, status, time, client_id);
+                this.items4.add(program);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    @FXML
+    public void refresh_program_list(ActionEvent event) {
+        if(clientChoice.getSelectionModel().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez choisir un Client");
+            alert.showAndWait();
+        }else {
+            this.loadProgram();
+        }
+    }
+
     @FXML
     public void add_info_entreprise(ActionEvent event) {
         // Récupérer les valeurs des champs
@@ -378,8 +451,8 @@ public class CoachifyController {
 
     public void generate_program_pdf() {
 
-        Double time = Generator.SumAmmount(this.items3);
-        System.out.println("temps total : " + time);
+        Double time = items3.stream().mapToDouble(Exercice::getTime).sum();
+        System.out.println("temps total : " + time + " minutes");
 
         if (time == 0.0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -394,54 +467,10 @@ public class CoachifyController {
             Client client = (Client) clientChoice.getSelectionModel().getSelectedItem();
             int client_id = client.getId();
 
-            System.out.println("numéro du programme : " + num_program + " et numero du client : " + client_id);
+            System.out.println("programme numéro " + num_program + " et client numero " + client_id);
             fm.addProgram(num_program, status, time, client_id);
+            loadProgram();
         }
     }
-
-/*
-    @FXML
-    public void load_info_entreprise() {
-        // Spécifier le chemin du fichier JSON
-        String filePath = "src/main/resources/json/informations_entreprise.json";
-
-        try {
-            // Créer un ObjectMapper pour gérer le JSON
-            ObjectMapper objectMapper = new ObjectMapper();
-
-            // Lire le fichier JSON et le convertir en liste de Map
-            File file = new File(filePath);
-            List<Map<String, Object>> dataList;
-
-            if (file.exists()) {
-                dataList = objectMapper.readValue(file, new TypeReference<List<Map<String, Object>>>() {});
-            } else {
-                dataList = new ArrayList<>();
-            }
-
-            // Récupérer les informations de chaque entrée et les ajouter à la ListView
-            ObservableList<String> displayList = FXCollections.observableArrayList();
-
-            for (Map<String, Object> entry : dataList) {
-                String phone = (String) entry.get("phone");
-                String adresse = (String) entry.get("adresse");
-                String email = (String) entry.get("email");
-
-                // Format des informations à afficher dans la ListView
-                String displayInfo = "phone: " + phone + ", Adresse: " + adresse + ", Email: " + email;
-                displayList.add(displayInfo);
-            }
-
-            // Affecter la liste observable à la ListView
-            info_entreprise.setItems(displayList);
-
-            System.out.println("Les informations de l'entreprise ont été chargées avec succès.");
-
-        } catch (IOException e) {
-            System.err.println("Erreur lors de la lecture du fichier JSON : " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-*/
 
 }

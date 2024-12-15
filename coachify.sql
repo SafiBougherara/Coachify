@@ -76,7 +76,7 @@ CREATE TABLE `programs` (
   `id` int(11) NOT NULL,
   `num_program` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 0,
-  `amount` double NOT NULL,
+  `time` double NOT NULL,
   `client_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -84,7 +84,7 @@ CREATE TABLE `programs` (
 -- Dumping data for table `programs`
 --
 
-INSERT INTO `programs` (`id`, `num_program`, `status`, `amount`, `client_id`) VALUES
+INSERT INTO `programs` (`id`, `num_program`, `status`, `time`, `client_id`) VALUES
 (1, 275, 1, 12500, 1),
 (2, 358, 0, 25000, 1),
 (3, 897, 0, 7768691207, 6),

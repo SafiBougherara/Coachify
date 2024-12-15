@@ -6,6 +6,7 @@ module com.example.recepter {
     requires com.fasterxml.jackson.databind;
     requires kernel;
     requires layout;
+    requires jbcrypt;
 
 
     opens com.example.Coachify to javafx.fxml;

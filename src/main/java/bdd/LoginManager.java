@@ -51,4 +51,48 @@ public class LoginManager {
             throw new RuntimeException(e);
         }
     }
+
+    public ResultSet getAllUsers() {
+        BddManager bdd = new BddManager();
+        Connection connection = bdd.connection();
+        ResultSet rs = null;
+        String sql_request = "SELECT * FROM users";
+        try {
+            Statement stmt = connection.createStatement();
+            rs = stmt.executeQuery(sql_request);
+            //System.out.println(rs);
+            return rs;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public void removeUser(int id) {
+        BddManager bdd = new BddManager();
+        Connection connection = bdd.connection();
+        String sql_request = "DELETE FROM users WHERE id = ?";
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(sql_request);
+            pstmt.setInt(1, id);
+            pstmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int getUserCount() {
+        String query = "SELECT COUNT(*) AS total FROM users"; // Requête SQL pour compter le nombre d'utilisateurs
+        try (Connection connection = new BddManager().connection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            if (resultSet.next()) {
+                return resultSet.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 }

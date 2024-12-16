@@ -2,6 +2,7 @@ package com.example.Coachify;
 
 import Models.Client;
 import Models.Program;
+import Models.User;
 import bdd.LoginManager;
 import bdd.ProgramManager;
 import javafx.collections.FXCollections;
@@ -100,6 +101,8 @@ public class CoachifyController {
     ObservableList<Exercice> items3 = FXCollections.observableArrayList();
 
     ObservableList<Program> items4 = FXCollections.observableArrayList();
+
+    ObservableList<User> items5 = FXCollections.observableArrayList();
 
     @FXML
     public void initialize(){
@@ -502,7 +505,70 @@ public class CoachifyController {
             alert.setHeaderText(null);
             alert.setContentText("Utilisateur ajouté avec succes");
             alert.showAndWait();
+
+            loadUser();
         }
     }
+
+
+    public void load_user_tab(Event e) {
+        loadUser();
+        info_usersList.setItems(this.items5);
+    }
+
+    @FXML
+    public void loadUser() {
+        this.items5.clear();
+
+        try {
+            LoginManager loginManager = new LoginManager();
+            ResultSet rs = loginManager.getAllUsers();
+
+            while (rs.next()) {
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                int id = rs.getInt("id");
+                User user = new User(id, username, password);
+                this.items5.add(user);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void remove_user(ActionEvent event) {
+        User user = (User) info_usersList.getSelectionModel().getSelectedItem();
+        LoginManager loginManager = new LoginManager();
+
+        int userCount = loginManager.getUserCount(); // Récupérer le nombre total d'utilisateurs
+
+        if (userCount == 1) { // Vérifie s'il reste un seul utilisateur
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Impossible de supprimer le dernier utilisateur");
+            alert.showAndWait();
+            return; // Sort de la méthode
+        }
+
+        if (user == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner un utilisateur");
+            alert.showAndWait();
+        } else {
+
+            loginManager.removeUser(user.getId()); // Supprimer l'utilisateur
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText(null);
+            alert.setContentText("Utilisateur supprimé avec succès");
+            alert.showAndWait();
+            this.loadUser(); // Recharge la liste des utilisateurs
+        }
+    }
+
 
 }

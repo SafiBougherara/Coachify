@@ -158,7 +158,7 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab text="gestion utilisateur">
+      <Tab onSelectionChanged="#load_user_tab" text="gestion utilisateur">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -181,6 +181,7 @@
                                  </font>
                               </Label>
                               <PasswordField fx:id="add_password" layoutX="148.0" layoutY="269.0" prefHeight="25.0" prefWidth="356.0" />
+                              <Button layoutX="4.0" layoutY="537.0" mnemonicParsing="false" onAction="#remove_user" prefHeight="26.0" prefWidth="172.0" text="Retirer l'utilisateur choisi" />
                            </children>
                         </AnchorPane>
                      </items>

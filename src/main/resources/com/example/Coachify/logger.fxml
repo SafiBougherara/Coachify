@@ -8,21 +8,27 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Coachify.LoggerController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="440.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Coachify.LoggerController">
    <children>
-      <AnchorPane layoutX="5.0" layoutY="7.0" minHeight="0.0" minWidth="0.0" prefHeight="388.0" prefWidth="585.0">
+      <AnchorPane layoutX="32.0" layoutY="31.0" minHeight="0.0" minWidth="0.0" prefHeight="386.0" prefWidth="408.0">
          <children>
-            <Label layoutX="90.0" layoutY="163.0" text="Utilisateur" />
-            <TextField fx:id="user" layoutX="155.0" layoutY="158.0" prefHeight="26.0" prefWidth="223.0" />
-            <Label layoutX="77.0" layoutY="210.0" prefHeight="17.0" prefWidth="78.0" text="Mot de passe" />
-            <PasswordField fx:id="pass" layoutX="155.0" layoutY="206.0" prefHeight="25.0" prefWidth="223.0" />
-            <ImageView fitHeight="120.0" fitWidth="124.0" layoutX="439.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <Label layoutX="43.0" layoutY="189.0" text="Utilisateur" />
+            <TextField fx:id="user" layoutX="108.0" layoutY="184.0" prefHeight="26.0" prefWidth="223.0" />
+            <Label layoutX="30.0" layoutY="236.0" prefHeight="17.0" prefWidth="78.0" text="Mot de passe" />
+            <PasswordField fx:id="pass" layoutX="108.0" layoutY="232.0" prefHeight="25.0" prefWidth="223.0" />
+            <ImageView fitHeight="128.0" fitWidth="177.0" layoutX="123.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../assets/image-removebg-preview.png" />
+                  <Image url="@../../../assets/logo.png" />
                </image>
             </ImageView>
-            <Button layoutX="420.0" layoutY="172.0" mnemonicParsing="false" onAction="#switchToMyView" text="Button" />
+            <Button layoutX="154.0" layoutY="296.0" mnemonicParsing="false" onAction="#switchToMyView" text="Connexion" />
+            <Label layoutX="196.0" layoutY="129.0" prefHeight="11.0" prefWidth="91.0" text="COACHIFY">
+               <font>
+                  <Font name="Calibri Bold" size="21.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

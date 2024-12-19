@@ -1,0 +1,168 @@
+/* Fond global neutre */
+.root {
+    -fx-background-color: #f5f5f5;  /* Fond clair pour l'application */
+    -fx-text-fill: black;  /* Texte noir par défaut */
+}
+
+/* Style des AnchorPanes */
+.anchor-pane {
+    -fx-background-color: #ffffff;  /* Fond blanc pour les AnchorPanes */
+}
+
+/* Style des TextFields */
+.text-field {
+    -fx-background-color: #ffffff;  /* Fond blanc pour les champs de texte */
+    -fx-text-fill: black;  /* Texte noir */
+    -fx-prompt-text-fill: #888;  /* Couleur du texte d'invite (gris clair) */
+    -fx-border-color: #ccc;  /* Bordure gris clair */
+}
+
+/* Style des TextAreas */
+.text-area {
+    -fx-background-color: #ffffff;  /* Fond blanc pour les zones de texte */
+    -fx-text-fill: black;  /* Texte noir */
+    -fx-border-color: #ccc;  /* Bordure gris clair */
+}
+
+/* Style des Buttons */
+.button {
+    -fx-background-color: #007BFF;  /* Bleu pour les boutons */
+    -fx-text-fill: white;  /* Texte blanc */
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #0056b3;  /* Bleu plus foncé au survol */
+}
+
+/* Style des ChoiceBoxes */
+.choice-box {
+    -fx-background-color: #ffffff;  /* Fond blanc pour les choice boxes */
+    -fx-text-fill: black;  /* Texte noir */
+    -fx-border-color: #ccc;  /* Bordure gris clair */
+}
+
+/* Style des ComboBoxes */
+.combo-box {
+    -fx-background-color: #ffffff;  /* Fond blanc pour les combo boxes */
+    -fx-text-fill: black;  /* Texte noir */
+    -fx-border-color: #ccc;  /* Bordure gris clair */
+}
+
+/* Style des Labels */
+.label {
+    -fx-text-fill: black;  /* Texte noir */
+}
+
+/* Style des TabPane et Tabs */
+.tab-pane {
+    -fx-background-color: #ffffff;  /* Fond blanc pour le TabPane */
+    -fx-border-color: #007BFF;  /* Bordure bleue */
+}
+
+.tab {
+    -fx-background-color: #007BFF;  /* Bleu pour les onglets */
+    -fx-text-fill: white;  /* Texte blanc pour les onglets */
+}
+
+.tab:selected {
+    -fx-background-color: #0056b3;  /* Bleu plus foncé pour l'onglet sélectionné */
+    -fx-text-fill: white;  /* Texte blanc pour l'onglet sélectionné */
+}
+
+.tab:hover {
+    -fx-background-color: #0056b3;  /* Bleu plus foncé pour l'onglet au survol */
+    -fx-text-fill: white;  /* Texte blanc pour l'onglet au survol */
+}
+
+/* Style des ScrollPanes */
+.scroll-pane {
+    -fx-background-color: #f5f5f5;  /* Fond clair pour les ScrollPanes */
+}
+
+.scroll-bar {
+    -fx-background-color: #ffffff;  /* Fond blanc pour les barres de défilement */
+    -fx-control-inner-background: #ffffff;  /* Fond interne des barres de défilement */
+}
+
+/* Style des Sliders */
+.slider {
+    -fx-background-color: #ffffff;  /* Fond blanc pour les sliders */
+    -fx-text-fill: black;  /* Texte noir */
+    -fx-border-color: #ccc;  /* Bordure gris clair */
+}
+
+/* Style des CheckBoxes */
+.check-box {
+    -fx-text-fill: black;  /* Texte noir pour les checkboxes */
+}
+
+/* Style des RadioButtons */
+.radio-button {
+    -fx-text-fill: black;  /* Texte noir pour les boutons radio */
+}
+
+/* Style des TitledPanes */
+.titled-pane {
+    -fx-background-color: #ffffff;  /* Fond blanc pour les panneaux titrés */
+    -fx-text-fill: black;  /* Texte noir */
+}
+
+.titled-pane:expanded {
+    -fx-background-color: #f0f0f0;  /* Fond légèrement plus clair quand le panneau est ouvert */
+}
+
+/* Style des Menus */
+.menu-bar {
+    -fx-background-color: #ffffff;  /* Fond blanc pour la barre de menus */
+}
+
+.menu-item {
+    -fx-text-fill: black;  /* Texte noir pour les éléments de menu */
+}
+
+/* Style des ToolTips */
+.tooltip {
+    -fx-background-color: #ffffff;  /* Fond blanc pour les tooltips */
+    -fx-text-fill: black;  /* Texte noir */
+}
+
+/* Style des ListViews */
+.list-view {
+    -fx-background-color: #ffffff;  /* Fond blanc pour les ListViews */
+    -fx-text-fill: black;  /* Texte noir */
+    -fx-border-color: #ccc;  /* Bordure gris clair */
+}
+
+/* Style des ListCells dans les ListViews */
+.list-cell {
+    -fx-background-color: #ffffff;  /* Fond blanc pour les cellules de la ListView */
+    -fx-text-fill: black;  /* Texte noir */
+}
+
+.list-cell:hover {
+    -fx-background-color: #f0f0f0;  /* Fond plus clair au survol */
+}
+
+/* Style des SidePanels (comme les Accordions) */
+.accordion {
+    -fx-background-color: #ffffff;  /* Fond blanc pour les panneaux latéraux */
+}
+
+.accordion .accordion-header {
+    -fx-background-color: #f5f5f5;  /* Fond clair pour les en-têtes */
+    -fx-text-fill: black;  /* Texte noir */
+}
+
+.accordion .accordion-header:selected {
+    -fx-background-color: #007BFF;  /* Bleu pour les en-têtes sélectionnés */
+}
+
+.accordion .accordion-header:hover {
+    -fx-background-color: #e0e0e0;  /* Fond plus clair au survol */
+}
+
+.accordion .accordion-content {
+    -fx-background-color: #f5f5f5;  /* Fond clair pour le contenu des panneaux */
+}

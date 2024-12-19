@@ -9,6 +9,9 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import bdd.ExerciceManager;
 import bdd.ClientManager;
@@ -21,6 +24,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -569,6 +573,9 @@ public class CoachifyController {
             this.loadUser(); // Recharge la liste des utilisateurs
         }
     }
+
+    @FXML
+    public void déconnexion(Event e){}
 
 
 }

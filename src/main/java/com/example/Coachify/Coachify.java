@@ -27,7 +27,7 @@ public class Coachify extends Application {
         }
 
         // Configurer la fenêtre
-        stage.setTitle("Coachify");
+        stage.setTitle("Connexion");
         stage.setScene(scene);
         stage.show();
     }

@@ -54,6 +54,7 @@ public class LoggerController {
         return loginManager.login(user, pass);
 
         // dans le cas où plus aucun utilisateur dans la bdd
-        //return true;
+
+//      return true;
     }
 }

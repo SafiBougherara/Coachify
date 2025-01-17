@@ -574,8 +574,28 @@ public class CoachifyController {
         }
     }
 
-    @FXML
-    public void déconnexion(Event e){}
+
+    public void deconnexion(ActionEvent event) {
+        try {
+            // Charger le fichier logger.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/Coachify/logger.fxml"));
+            Scene loginScene = new Scene(loader.load(), 450, 500); // Dimensions de la scène
+
+            // Récupérer le Stage actuel
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Définir la nouvelle scène (connexion)
+            stage.setScene(loginScene);
+
+            // Optionnel : Changer le titre de la fenêtre
+            stage.setTitle("Connexion");
+
+            // Afficher la scène de connexion
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace(); // Afficher une erreur si le fichier FXML ne se charge pas
+        }
+    }
 
 
 }

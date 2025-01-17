@@ -26,14 +26,14 @@
 
 /* Style des Buttons */
 .button {
-    -fx-background-color: #007BFF;  /* Bleu pour les boutons */
+    -fx-background-color: #90EE90;  /* Vert clair pour les boutons */
     -fx-text-fill: white;  /* Texte blanc */
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
 }
 
 .button:hover {
-    -fx-background-color: #0056b3;  /* Bleu plus foncé au survol */
+    -fx-background-color: #6EBF6E;  /* Vert clair plus foncé au survol */
 }
 
 /* Style des ChoiceBoxes */
@@ -58,21 +58,21 @@
 /* Style des TabPane et Tabs */
 .tab-pane {
     -fx-background-color: #ffffff;  /* Fond blanc pour le TabPane */
-    -fx-border-color: #007BFF;  /* Bordure bleue */
+    -fx-border-color: #90EE90;  /* Bordure verte claire */
 }
 
 .tab {
-    -fx-background-color: #007BFF;  /* Bleu pour les onglets */
+    -fx-background-color: #90EE90;  /* Vert clair pour les onglets */
     -fx-text-fill: white;  /* Texte blanc pour les onglets */
 }
 
 .tab:selected {
-    -fx-background-color: #0056b3;  /* Bleu plus foncé pour l'onglet sélectionné */
+    -fx-background-color: #6EBF6E;  /* Vert clair plus foncé pour l'onglet sélectionné */
     -fx-text-fill: white;  /* Texte blanc pour l'onglet sélectionné */
 }
 
 .tab:hover {
-    -fx-background-color: #0056b3;  /* Bleu plus foncé pour l'onglet au survol */
+    -fx-background-color: #6EBF6E;  /* Vert clair plus foncé pour l'onglet au survol */
     -fx-text-fill: white;  /* Texte blanc pour l'onglet au survol */
 }
 
@@ -156,7 +156,7 @@
 }
 
 .accordion .accordion-header:selected {
-    -fx-background-color: #007BFF;  /* Bleu pour les en-têtes sélectionnés */
+    -fx-background-color: #90EE90;  /* Vert clair pour les en-têtes sélectionnés */
 }
 
 .accordion .accordion-header:hover {

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 15, 2024 at 12:03 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: 127.0.0.1:3306
+-- Generation Time: Jan 17, 2025 at 11:12 AM
+-- Server version: 9.1.0
+-- PHP Version: 8.3.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,15 +27,17 @@ SET time_zone = "+00:00";
 -- Table structure for table `clients`
 --
 
-CREATE TABLE `clients` (
-  `id` int(11) NOT NULL,
-  `firstname` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `phone` varchar(255) NOT NULL,
-  `adresse` text NOT NULL,
-  `mail` varchar(255) NOT NULL,
-  `birth_date` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+DROP TABLE IF EXISTS `clients`;
+CREATE TABLE IF NOT EXISTS `clients` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `adresse` text COLLATE utf8mb4_general_ci NOT NULL,
+  `mail` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `birth_date` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `clients`
@@ -51,12 +53,14 @@ INSERT INTO `clients` (`id`, `firstname`, `name`, `phone`, `adresse`, `mail`, `b
 -- Table structure for table `exercices`
 --
 
-CREATE TABLE `exercices` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+DROP TABLE IF EXISTS `exercices`;
+CREATE TABLE IF NOT EXISTS `exercices` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `time` double NOT NULL,
-  `répétitions` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `répétitions` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `exercices`
@@ -72,13 +76,16 @@ INSERT INTO `exercices` (`id`, `name`, `time`, `répétitions`) VALUES
 -- Table structure for table `programs`
 --
 
-CREATE TABLE `programs` (
-  `id` int(11) NOT NULL,
-  `num_program` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 0,
+DROP TABLE IF EXISTS `programs`;
+CREATE TABLE IF NOT EXISTS `programs` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `num_program` int NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
   `time` double NOT NULL,
-  `client_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `client_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `client_id` (`client_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `programs`
@@ -95,50 +102,28 @@ INSERT INTO `programs` (`id`, `num_program`, `status`, `time`, `client_id`) VALU
 (8, 321, 0, 80, 3),
 (9, 629, 0, 12500, 3);
 
---
--- Indexes for dumped tables
---
+-- --------------------------------------------------------
 
 --
--- Indexes for table `clients`
---
-ALTER TABLE `clients`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `exercices`
---
-ALTER TABLE `exercices`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `programs`
---
-ALTER TABLE `programs`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `client_id` (`client_id`);
-
---
--- AUTO_INCREMENT for dumped tables
+-- Table structure for table `users`
 --
 
---
--- AUTO_INCREMENT for table `clients`
---
-ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- AUTO_INCREMENT for table `exercices`
+-- Dumping data for table `users`
 --
-ALTER TABLE `exercices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
---
--- AUTO_INCREMENT for table `programs`
---
-ALTER TABLE `programs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+INSERT INTO `users` (`id`, `username`, `password`, `created_at`) VALUES
+(2, 'safi', '$2a$10$MuruCN.u7tSI1NxaM0DFeuB4ruyz6uGwIAKA1tmW.VQDzmdadABOy', '2025-01-17 11:10:34');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

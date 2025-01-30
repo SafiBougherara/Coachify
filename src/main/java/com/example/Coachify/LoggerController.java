@@ -43,6 +43,8 @@ public class LoggerController {
 
             // Appliquer la nouvelle scène au Stage
             stage.setScene(scene);
+            stage.setTitle("Coachify"); 
+
         }
     }
 
@@ -52,9 +54,9 @@ public class LoggerController {
 
         LoginManager loginManager = new LoginManager();
         return loginManager.login(user, pass);
+        //return true;
 
         // dans le cas où plus aucun utilisateur dans la bdd
 
-//      return true;
     }
 }

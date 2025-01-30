@@ -12,6 +12,8 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
@@ -31,20 +33,30 @@
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="417.0">
                            <children>
-                              <Label layoutX="79.0" layoutY="113.0" text="Nom" />
-                              <TextField fx:id="lastname" layoutX="137.0" layoutY="108.0" prefHeight="26.0" prefWidth="357.0" />
-                              <Label layoutX="64.0" layoutY="153.0" text="Téléphone" />
-                              <TextField fx:id="phone" layoutX="136.0" layoutY="148.0" prefHeight="26.0" prefWidth="360.0" />
-                              <TextArea fx:id="adresse" layoutX="136.0" layoutY="220.0" prefHeight="47.0" prefWidth="359.0" />
-                              <Label layoutX="69.0" layoutY="235.0" text="Adresse" />
-                              <Label layoutX="76.0" layoutY="190.0" text="Email" />
-                              <TextField fx:id="email" layoutX="136.0" layoutY="185.0" prefHeight="26.0" prefWidth="359.0" />
-                              <Button layoutX="132.0" layoutY="328.0" mnemonicParsing="false" onAction="#add_client" prefHeight="27.0" prefWidth="360.0" text="Ajouter un client" />
-                              <Label layoutX="70.0" layoutY="74.0" text="Prénom" />
-                              <TextField fx:id="firstname" layoutX="137.0" layoutY="69.0" prefHeight="26.0" prefWidth="358.0" />
+                              <Label layoutX="53.0" layoutY="167.0" text="Prénom" />
+                              <TextField fx:id="firstname" layoutX="53.0" layoutY="185.0" prefHeight="27.0" prefWidth="177.0" />
+                              <Label layoutX="238.0" layoutY="167.0" text="Nom" />
+                              <TextField fx:id="lastname" layoutX="236.0" layoutY="185.0" prefHeight="27.0" prefWidth="193.0" />
+                              <Label layoutX="51.0" layoutY="212.0" text="Téléphone" />
+                              <TextField fx:id="phone" layoutX="53.0" layoutY="230.0" prefHeight="27.0" prefWidth="376.0" />
+                              <Label layoutX="54.0" layoutY="257.0" text="Email" />
+                              <TextField fx:id="email" layoutX="54.0" layoutY="275.0" prefHeight="27.0" prefWidth="376.0" />
+                              <Label layoutX="55.0" layoutY="302.0" prefHeight="18.0" prefWidth="122.0" text="Date de naissance" />
+                              <DatePicker fx:id="birth_date" layoutX="57.0" layoutY="320.0" prefHeight="27.0" prefWidth="374.0" />
+                              <Label layoutX="56.0" layoutY="347.0" prefHeight="18.0" prefWidth="60.0" text="Adresse" />
+                              <TextArea fx:id="adresse" layoutX="55.0" layoutY="365.0" prefHeight="47.0" prefWidth="376.0" />
+                              <Button layoutX="64.0" layoutY="420.0" mnemonicParsing="false" onAction="#add_client" prefHeight="27.0" prefWidth="360.0" text="Ajouter un client" />
                               <Button layoutX="9.0" layoutY="548.0" mnemonicParsing="false" onAction="#remove_selected_client" prefHeight="26.0" prefWidth="137.0" text="retirer le client choisi" />
-                              <DatePicker fx:id="birth_date" layoutX="136.0" layoutY="284.0" prefHeight="26.0" prefWidth="360.0" />
-                              <Label layoutX="31.0" layoutY="288.0" text="Date de naissance" />
+                              <ImageView fitHeight="91.0" fitWidth="94.0" layoutX="431.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../assets/logo.png" />
+                                 </image>
+                              </ImageView>
+                              <Label alignment="CENTER" layoutX="14.0" layoutY="87.0" prefHeight="38.0" prefWidth="254.0" text="Gestion des Clients">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                     </items>
@@ -59,8 +71,8 @@
                   <HBox layoutX="6.0" layoutY="-3.0" prefHeight="59.0" prefWidth="893.0" spacing="20.0">
                      <children>
                         <Label text="Clients" />
-                        <ChoiceBox fx:id="clientChoice" prefHeight="26.0" prefWidth="742.0" />
-                        <Button mnemonicParsing="false" onAction="#refresh_program_list" prefHeight="26.0" prefWidth="39.0" text="OK" />
+                        <ChoiceBox fx:id="clientChoice" prefHeight="27.0" prefWidth="729.0" />
+                        <Button mnemonicParsing="false" onAction="#refresh_program_list" prefHeight="26.0" prefWidth="50.0" text="OK" />
                      </children>
                      <padding>
                         <Insets left="20.0" top="10.0" />
@@ -75,15 +87,23 @@
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <Label fx:id="num_program" layoutX="194.0" layoutY="27.0" prefHeight="17.0" prefWidth="142.0" text="Numéro de programme" />
-                              <Label layoutX="44.0" layoutY="79.0" text="Exercices" />
-                              <ChoiceBox fx:id="exerciceChoice" layoutX="115.0" layoutY="74.0" prefHeight="26.0" prefWidth="383.0" />
-                              <Button layoutX="240.0" layoutY="119.0" mnemonicParsing="false" onAction="#add_exercice_on_recept" prefHeight="26.0" prefWidth="256.0" text="Ajouter l'exercice au programme" />
+                              <Label fx:id="num_program" layoutX="14.0" layoutY="90.0" prefHeight="27.0" prefWidth="289.0" text="Numéro de programme">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font></Label>
+                              <Label layoutX="14.0" layoutY="154.0" text="Exercices" />
+                              <ChoiceBox fx:id="exerciceChoice" layoutX="14.0" layoutY="172.0" prefHeight="27.0" prefWidth="414.0" />
+                              <Button layoutX="441.0" layoutY="172.0" mnemonicParsing="false" onAction="#add_exercice_on_recept" prefHeight="26.0" prefWidth="82.0" text="Ajouter" />
                               <ListView fx:id="temp_exerciceList" layoutX="3.0" layoutY="274.0" prefHeight="230.0" prefWidth="524.0" />
                               <Button layoutX="218.0" layoutY="239.0" mnemonicParsing="false" onAction="#generate_program_pdf" prefHeight="26.0" prefWidth="177.0" text="Génerer le programme" />
-                              <Button layoutX="428.0" layoutY="239.0" mnemonicParsing="false" onAction="#clean_added_exercices" prefHeight="26.0" prefWidth="89.0" text="vider la liste" />
+                              <Button layoutX="428.0" layoutY="239.0" mnemonicParsing="false" onAction="#clean_added_exercices" prefHeight="26.0" prefWidth="94.0" text="vider la liste" />
                               <TextField fx:id="temp_sum" layoutX="368.0" layoutY="466.0" />
-                              <Button layoutX="13.0" layoutY="239.0" mnemonicParsing="false" onAction="#remove_selected_program" prefHeight="26.0" prefWidth="165.0" text="Retirer le programme choisi" />
+                              <Button layoutX="14.0" layoutY="239.0" mnemonicParsing="false" onAction="#remove_selected_program" prefHeight="26.0" prefWidth="165.0" text="Retirer le programme choisi" />
+                              <ImageView fitHeight="91.0" fitWidth="94.0" layoutX="428.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../assets/logo.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                     </items>
@@ -104,19 +124,24 @@
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="417.0">
                            <children>
-                              <Label alignment="CENTER" layoutX="149.0" layoutY="25.0" prefHeight="36.0" prefWidth="301.0" text="Gestion des exercices">
+                              <Label alignment="CENTER" layoutX="33.0" layoutY="130.0" prefHeight="38.0" prefWidth="254.0" text="Gestion des exercices">
                                  <font>
                                     <Font size="26.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="nameExercice" layoutX="58.0" layoutY="110.0" prefHeight="26.0" prefWidth="360.0" />
-                              <Label layoutX="97.0" layoutY="149.0" text="Temps (en minutes)" />
-                              <TextField fx:id="timeExercice" layoutX="67.0" layoutY="171.0" prefHeight="26.0" prefWidth="162.0" />
-                              <Button fx:id="addExercice" layoutX="429.0" layoutY="114.0" mnemonicParsing="false" onAction="#add_exercice" prefHeight="70.0" prefWidth="136.0" text="Ajouter un exercice" />
-                              <Label layoutX="16.0" layoutY="114.0" text="Nom" />
+                              <Label layoutX="38.0" layoutY="233.0" prefHeight="18.0" prefWidth="129.0" text="Nom de l'exercice" />
+                              <TextField fx:id="nameExercice" layoutX="37.0" layoutY="251.0" prefHeight="27.0" prefWidth="365.0" />
+                              <Label layoutX="38.0" layoutY="281.0" text="Temps (en minutes)" />
+                              <TextField fx:id="timeExercice" layoutX="38.0" layoutY="298.0" prefHeight="27.0" prefWidth="184.0" />
+                              <Label layoutX="229.0" layoutY="281.0" text="Répétitions" />
+                              <TextField fx:id="repExercice" layoutX="229.0" layoutY="298.0" prefHeight="27.0" prefWidth="173.0" />
+                              <Button fx:id="addExercice" layoutX="413.0" layoutY="251.0" mnemonicParsing="false" onAction="#add_exercice" prefHeight="75.0" prefWidth="129.0" text="Ajouter un exercice" />
                               <Button layoutX="11.0" layoutY="543.0" mnemonicParsing="false" onAction="#remove_selected_exercice" prefHeight="26.0" prefWidth="138.0" text="retirer l'exercice choisi" />
-                              <Label layoutX="300.0" layoutY="149.0" text="Répétitions" />
-                              <TextField fx:id="repExercice" layoutX="258.0" layoutY="171.0" prefHeight="26.0" prefWidth="159.0" />
+                              <ImageView fitHeight="91.0" fitWidth="94.0" layoutX="483.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../assets/logo.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                      </items>
@@ -138,18 +163,23 @@
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="417.0">
                            <children>
-                              <Label layoutX="76.0" layoutY="191.0" text="Téléphone" />
-                              <TextField fx:id="phoneE" layoutX="146.0" layoutY="187.0" prefHeight="26.0" prefWidth="360.0" />
-                              <TextArea fx:id="adresseE" layoutX="147.0" layoutY="258.0" prefHeight="47.0" prefWidth="359.0" />
-                              <Label layoutX="83.0" layoutY="273.0" text="Adresse" />
-                              <Label layoutX="90.0" layoutY="228.0" text="Email" />
-                              <TextField fx:id="emailE" layoutX="147.0" layoutY="224.0" prefHeight="26.0" prefWidth="359.0" />
-                              <Button layoutX="157.0" layoutY="329.0" mnemonicParsing="false" onAction="#add_info_entreprise" prefHeight="26.0" prefWidth="341.0" text="Modifier informations de l'entreprise" />
-                              <Label alignment="CENTER" layoutX="177.0" layoutY="48.0" prefHeight="36.0" prefWidth="301.0" text="Information entreprise">
+                              <Label layoutX="90.0" layoutY="206.0" text="Téléphone" />
+                              <TextField fx:id="phoneE" layoutX="90.0" layoutY="224.0" prefHeight="27.0" prefWidth="357.0" />
+                              <TextArea fx:id="adresseE" layoutX="90.0" layoutY="315.0" prefHeight="47.0" prefWidth="357.0" />
+                              <Label layoutX="90.0" layoutY="299.0" text="Adresse" />
+                              <Label layoutX="90.0" layoutY="251.0" text="Email" />
+                              <TextField fx:id="emailE" layoutX="90.0" layoutY="269.0" prefHeight="27.0" prefWidth="358.0" />
+                              <Button layoutX="99.0" layoutY="370.0" mnemonicParsing="false" onAction="#add_info_entreprise" prefHeight="26.0" prefWidth="341.0" text="Modifier informations de l'entreprise" />
+                              <Label alignment="CENTER" layoutX="45.0" layoutY="97.0" prefHeight="36.0" prefWidth="301.0" text="Information Entreprise">
                                  <font>
                                     <Font size="26.0" />
                                  </font>
                               </Label>
+                              <ImageView fitHeight="91.0" fitWidth="94.0" layoutX="539.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../assets/logo.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                      </items>
@@ -171,18 +201,23 @@
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="417.0">
                            <children>
-                              <Label layoutX="72.0" layoutY="273.0" text="Mot de passe" />
-                              <Label layoutX="90.0" layoutY="228.0" text="Utilisateur" />
-                              <TextField fx:id="add_username" layoutX="147.0" layoutY="224.0" prefHeight="26.0" prefWidth="359.0" />
-                              <Button layoutX="157.0" layoutY="329.0" mnemonicParsing="false" onAction="#add_user" prefHeight="26.0" prefWidth="341.0" text="Ajouter un utilisateur" />
-                              <Label alignment="CENTER" layoutX="177.0" layoutY="48.0" prefHeight="36.0" prefWidth="301.0" text="Information utilisateur">
+                              <Label layoutX="92.0" layoutY="239.0" text="Mot de passe" />
+                              <Label layoutX="92.0" layoutY="194.0" text="Utilisateur" />
+                              <TextField fx:id="add_username" layoutX="90.0" layoutY="212.0" prefHeight="27.0" prefWidth="318.0" />
+                              <Button layoutX="90.0" layoutY="292.0" mnemonicParsing="false" onAction="#add_user" prefHeight="26.0" prefWidth="320.0" text="Ajouter un utilisateur" />
+                              <Label alignment="CENTER" layoutX="25.0" layoutY="108.0" prefHeight="36.0" prefWidth="301.0" text="Information utilisateur">
                                  <font>
                                     <Font size="26.0" />
                                  </font>
                               </Label>
-                              <PasswordField fx:id="add_password" layoutX="148.0" layoutY="269.0" prefHeight="25.0" prefWidth="356.0" />
+                              <PasswordField fx:id="add_password" layoutX="91.0" layoutY="257.0" prefHeight="27.0" prefWidth="319.0" />
                               <Button layoutX="4.0" layoutY="537.0" mnemonicParsing="false" onAction="#remove_user" prefHeight="26.0" prefWidth="172.0" text="Retirer l'utilisateur choisi" />
                               <Button layoutX="533.0" layoutY="537.0" mnemonicParsing="false" onAction="#deconnexion" text="Déconnexion" />
+                              <ImageView fitHeight="91.0" fitWidth="94.0" layoutX="539.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../assets/logo.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                      </items>

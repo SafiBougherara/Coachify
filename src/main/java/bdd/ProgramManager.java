@@ -70,4 +70,33 @@ public class ProgramManager {
         }
         return 0;
     }
+
+    /*
+    * getProgramDetails permet de recuperer le status du programme ('status') dans ma table programs
+    * puis, par jointure sur la table exo_prog, de recuperer tous les id d'exercices (exo_id) par rapport
+    *  à l'id du programme (prog_id), et enfin, de recuperer via l'id des exercices,les contenus des colonnes
+    * 'name', 'time' et 'repetitions' dans la table exercices
+    *
+    * */
+    public ResultSet getProgramDetails(int id) {
+        BddManager bm = new BddManager();
+        Connection connection = bm.connection();
+        ResultSet rs = null;
+
+        String sql_request = "SELECT p.status, e.id AS exo_id, e.name, e.time, e.repetitions " +
+                "FROM programs p " +
+                "LEFT JOIN exo_prog ep ON p.id = ep.prog_id " +
+                "LEFT JOIN exercices e ON ep.exo_id = e.id " +
+                "WHERE p.id = ?";
+
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(sql_request);
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            //System.out.println(rs);
+            return rs;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

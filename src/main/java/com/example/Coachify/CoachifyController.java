@@ -336,6 +336,28 @@ public class CoachifyController {
         }
     }
 
+    public void view_more_prog(ActionEvent event) {
+
+        Program program = (Program) programList.getSelectionModel().getSelectedItem();
+        if (program != null) {
+            System.out.println("numéro du programme : " + program.getId());
+            ProgramManager pm = new ProgramManager();
+            ResultSet rs = pm.getProgramDetails(program.getId());
+            try {
+                while (rs.next()) {
+                    System.out.println("Status du programme: " + rs.getInt("status") +
+                            ", Exo ID: " + rs.getInt("exo_id") +
+                            ", Name: " + rs.getString("name") +
+                            ", Time: " + rs.getDouble("time") +
+                            ", Repetitions: " + rs.getInt("repetitions"));
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+
     private void loadClients(){
         this.items2.clear();
 
@@ -503,6 +525,7 @@ public class CoachifyController {
 
         }
     }
+
 
     public void add_user(ActionEvent event) {
 

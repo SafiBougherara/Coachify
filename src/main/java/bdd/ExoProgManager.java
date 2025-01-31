@@ -5,14 +5,14 @@ import java.sql.*;
 public class ExoProgManager {
 
     //création d'un lien exo_prog quand un programme est créé
-    public boolean addExoProg(int idExo, int idProg) {
+    public boolean addExoProg(int exo_id, int prog_id) {
         BddManager bddManager = new BddManager();
         Connection Connection = bddManager.connection();
-        String sql_request = "INSERT INTO exo_prog (id_exo, id_prog) VALUES (?, ?)";
+        String sql_request = "INSERT INTO exo_prog (exo_id, prog_id) VALUES (?, ?)";
         try {
             PreparedStatement pstmt = Connection.prepareStatement(sql_request);
-            pstmt.setInt(1, idExo);
-            pstmt.setInt(2, idProg);
+            pstmt.setInt(1, exo_id);
+            pstmt.setInt(2, prog_id);
             return pstmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);

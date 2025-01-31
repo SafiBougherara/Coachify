@@ -3,8 +3,7 @@ package com.example.Coachify;
 import Models.Client;
 import Models.Program;
 import Models.User;
-import bdd.LoginManager;
-import bdd.ProgramManager;
+import bdd.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -13,8 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import bdd.ExerciceManager;
-import bdd.ClientManager;
 import Models.Exercice;
 import javafx.collections.ObservableList;
 
@@ -467,10 +464,12 @@ public class CoachifyController {
 
     public void generate_program() {
 
+        // Calcul du temps total de tous les exercices
         Double time = items3.stream().mapToDouble(Exercice::getTime).sum();
         System.out.println(items3);
         System.out.println("temps total : " + time + " minutes");
 
+        // Vérification s'il y a des exercices
         if (time == 0.0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
@@ -478,15 +477,30 @@ public class CoachifyController {
             alert.setContentText("Veuillez ajouter au moins un exercice");
             alert.showAndWait();
         } else {
+            // Générer un numéro de programme aléatoire
             ProgramManager fm = new ProgramManager();
             int num_program = (int) (Math.random() * 1000);
             boolean status = false;
+
+            // Obtenir le client sélectionné
             Client client = (Client) clientChoice.getSelectionModel().getSelectedItem();
             int client_id = client.getId();
 
-            System.out.println("programme numéro " + num_program + " et client numero " + client_id);
+            System.out.println("programme numéro " + num_program + " et client numéro " + client_id);
+
+            // Ajouter le programme dans la base de données
             fm.addProgram(num_program, status, time, client_id);
-            loadProgram();
+
+            loadProgram(); // Recharger le programme après les ajouts
+
+            int program_id = fm.getProgramId(num_program, client_id);
+
+            // Parcourir chaque exercice dans items3 et ajouter le lien avec le programme
+            for (Exercice exercise : items3) {
+                ExoProgManager exoProgManager = new ExoProgManager();
+                exoProgManager.addExoProg(exercise.getId(), program_id); // Ajouter chaque exercice au programme
+            }
+
         }
     }
 

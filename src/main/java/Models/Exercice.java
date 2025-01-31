@@ -26,7 +26,7 @@ public class Exercice {
 
     @Override
     public String toString() {
-        return name + " | " + time + " minutes" + " | " + repExercice + " reppetitions";
+        return "exercice n° : " + id + " | "+ name + " | " + time + " minutes" + " | " + repExercice + " reppetitions";
     }
 
 

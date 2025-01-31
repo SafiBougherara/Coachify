@@ -51,4 +51,23 @@ public class ProgramManager {
             throw new RuntimeException(e);
         }
     }
+
+    public int getProgramId(int num_program, int client_id) {
+        BddManager bm = new BddManager();
+        Connection Connection = bm.connection();
+        String sql_request = "SELECT id FROM programs WHERE num_program = ? AND client_id = ?";
+        try {
+            PreparedStatement pstmt = Connection.prepareStatement(sql_request);
+            pstmt.setInt(1, num_program);
+            pstmt.setInt(2, client_id);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()) {
+                int id = rs.getInt("id");
+                return id;
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
 }

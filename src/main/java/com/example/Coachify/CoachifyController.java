@@ -235,7 +235,7 @@ public class CoachifyController {
             while (rs.next()) {
                 String name = rs.getString("name");
                 double time = rs.getDouble("time");
-                int repExercice = rs.getInt("répétitions");
+                int repExercice = rs.getInt("repetitions");
                 int id = rs.getInt("id");
                 Exercice exercice = new Exercice(name, time, id, repExercice);
                 this.items.add(exercice);

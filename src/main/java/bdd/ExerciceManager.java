@@ -7,7 +7,7 @@ public class ExerciceManager {
     public boolean addExercice(String name, double time, int repExercice) {
         BddManager bddManager = new BddManager();
         Connection Connection = bddManager.connection();
-        String sql_request = "INSERT INTO exercices (name, time, répétitions) VALUES (?, ?, ?)";
+        String sql_request = "INSERT INTO exercices (name, time, repetitions) VALUES (?, ?, ?)";
         try {
             PreparedStatement pstmt = Connection.prepareStatement(sql_request);
             pstmt.setString(1, name);

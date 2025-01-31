@@ -26,11 +26,11 @@ CREATE TABLE IF NOT EXISTS `exercices` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `time` double NOT NULL,
-  `répétitions` int NOT NULL,
+  `repetitions` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `exercices` (`id`, `name`, `time`, `répétitions`) VALUES
+INSERT INTO `exercices` (`id`, `name`, `time`, `repetitions`) VALUES
 (11, 'dips', 10, 13),
 (12, 'pompe diamants', 15, 10);
 

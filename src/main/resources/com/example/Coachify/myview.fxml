@@ -133,7 +133,7 @@
                               <TextField fx:id="nameExercice" layoutX="37.0" layoutY="251.0" prefHeight="27.0" prefWidth="365.0" />
                               <Label layoutX="38.0" layoutY="281.0" text="Temps (en minutes)" />
                               <TextField fx:id="timeExercice" layoutX="38.0" layoutY="298.0" prefHeight="27.0" prefWidth="184.0" />
-                              <Label layoutX="229.0" layoutY="281.0" text="Répétitions" />
+                              <Label layoutX="229.0" layoutY="281.0" text="repetitions" />
                               <TextField fx:id="repExercice" layoutX="229.0" layoutY="298.0" prefHeight="27.0" prefWidth="173.0" />
                               <Button fx:id="addExercice" layoutX="413.0" layoutY="251.0" mnemonicParsing="false" onAction="#add_exercice" prefHeight="75.0" prefWidth="129.0" text="Ajouter un exercice" />
                               <Button layoutX="11.0" layoutY="543.0" mnemonicParsing="false" onAction="#remove_selected_exercice" prefHeight="26.0" prefWidth="138.0" text="retirer l'exercice choisi" />
@@ -201,16 +201,16 @@
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="417.0">
                            <children>
-                              <Label layoutX="92.0" layoutY="239.0" text="Mot de passe" />
                               <Label layoutX="92.0" layoutY="194.0" text="Utilisateur" />
                               <TextField fx:id="add_username" layoutX="90.0" layoutY="212.0" prefHeight="27.0" prefWidth="318.0" />
+                              <Label layoutX="92.0" layoutY="239.0" text="Mot de passe" />
+                              <PasswordField fx:id="add_password" layoutX="91.0" layoutY="257.0" prefHeight="27.0" prefWidth="319.0" />
                               <Button layoutX="90.0" layoutY="292.0" mnemonicParsing="false" onAction="#add_user" prefHeight="26.0" prefWidth="320.0" text="Ajouter un utilisateur" />
                               <Label alignment="CENTER" layoutX="25.0" layoutY="108.0" prefHeight="36.0" prefWidth="301.0" text="Information utilisateur">
                                  <font>
                                     <Font size="26.0" />
                                  </font>
                               </Label>
-                              <PasswordField fx:id="add_password" layoutX="91.0" layoutY="257.0" prefHeight="27.0" prefWidth="319.0" />
                               <Button layoutX="4.0" layoutY="537.0" mnemonicParsing="false" onAction="#remove_user" prefHeight="26.0" prefWidth="172.0" text="Retirer l'utilisateur choisi" />
                               <Button layoutX="533.0" layoutY="537.0" mnemonicParsing="false" onAction="#deconnexion" text="Déconnexion" />
                               <ImageView fitHeight="91.0" fitWidth="94.0" layoutX="539.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">

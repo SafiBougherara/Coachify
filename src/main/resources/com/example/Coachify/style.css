@@ -32,6 +32,7 @@
     -fx-background-radius: 5px;
 }
 
+
 .button:hover {
     -fx-background-color: #6EBF6E;  /* Vert clair plus foncé au survol */
 }

@@ -95,7 +95,7 @@
                               <ChoiceBox fx:id="exerciceChoice" layoutX="14.0" layoutY="172.0" prefHeight="27.0" prefWidth="414.0" />
                               <Button layoutX="441.0" layoutY="172.0" mnemonicParsing="false" onAction="#add_exercice_on_recept" prefHeight="26.0" prefWidth="82.0" text="Ajouter" />
                               <ListView fx:id="temp_exerciceList" layoutX="3.0" layoutY="274.0" prefHeight="230.0" prefWidth="524.0" />
-                              <Button layoutX="218.0" layoutY="239.0" mnemonicParsing="false" onAction="#generate_program_pdf" prefHeight="26.0" prefWidth="177.0" text="Génerer le programme" />
+                              <Button layoutX="218.0" layoutY="239.0" mnemonicParsing="false" onAction="#generate_program" prefHeight="26.0" prefWidth="177.0" text="Génerer le programme" />
                               <Button layoutX="428.0" layoutY="239.0" mnemonicParsing="false" onAction="#clean_added_exercices" prefHeight="26.0" prefWidth="94.0" text="vider la liste" />
                               <TextField fx:id="temp_sum" layoutX="368.0" layoutY="466.0" />
                               <Button layoutX="14.0" layoutY="239.0" mnemonicParsing="false" onAction="#remove_selected_program" prefHeight="26.0" prefWidth="165.0" text="Retirer le programme choisi" />

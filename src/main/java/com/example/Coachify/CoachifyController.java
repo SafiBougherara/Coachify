@@ -465,9 +465,10 @@ public class CoachifyController {
         temp_sum.setText("total : 0.0 minutes");
     }
 
-    public void generate_program_pdf() {
+    public void generate_program() {
 
         Double time = items3.stream().mapToDouble(Exercice::getTime).sum();
+        System.out.println(items3);
         System.out.println("temps total : " + time + " minutes");
 
         if (time == 0.0) {

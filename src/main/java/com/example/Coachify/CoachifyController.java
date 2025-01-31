@@ -54,16 +54,6 @@ public class CoachifyController {
     private DatePicker birth_date;
 
 
-    //info_entreprise
-    @FXML
-    private TextField phoneE;
-    @FXML
-    private TextArea adresseE;
-    @FXML
-    private TextField emailE;
-    @FXML
-    private ListView info_entreprise;
-
 
     //client_choice
     @FXML
@@ -93,8 +83,6 @@ public class CoachifyController {
     @FXML
     private ListView info_usersList;
 
-    @FXML
-    private ListView<String> info_entrepriseList;
 
 
     ObservableList<Exercice> items = FXCollections.observableArrayList();
@@ -119,7 +107,6 @@ public class CoachifyController {
         loadExercices();
         loadClients();
 
-        //load_info_entreprise();
     }
 
     private boolean checkFieldsOnRecept() {
@@ -336,24 +323,63 @@ public class CoachifyController {
         }
     }
 
+    @FXML
     public void view_more_prog(ActionEvent event) {
-
         Program program = (Program) programList.getSelectionModel().getSelectedItem();
         if (program != null) {
-            System.out.println("numéro du programme : " + program.getId());
+            System.out.println("Numéro du programme : " + program.getId());
             ProgramManager pm = new ProgramManager();
             ResultSet rs = pm.getProgramDetails(program.getId());
+
             try {
+                // StringBuilder pour accumuler les détails du programme
+                StringBuilder details = new StringBuilder();
+                boolean statusDisplayed = false; // Flag pour afficher le statut qu'une seule fois
+                int count = 0;
                 while (rs.next()) {
-                    System.out.println("Status du programme: " + rs.getInt("status") +
-                            ", Exo ID: " + rs.getInt("exo_id") +
-                            ", Name: " + rs.getString("name") +
-                            ", Time: " + rs.getDouble("time") +
-                            ", Repetitions: " + rs.getInt("repetitions"));
+                    if (!statusDisplayed) {
+                        // Afficher le statut une seule fois avec la condition
+                        int status = rs.getInt("status");
+                        String statusText = (status == 0) ? "À faire" : "Fait";
+                        details.append("Status du programme : ")
+                                .append(statusText)
+                                .append("\n\n");
+                        statusDisplayed = true;
+                    }
+                    details.append("Exercice " + (++count) + " : ")
+                            .append(rs.getString("name"))
+                            .append("\n")
+                            .append("Temps : ")
+                            .append(rs.getDouble("time"))
+                            .append("\n")
+                            .append("Répetitions : ")
+                            .append(rs.getInt("repetitions"))
+                            .append("\n\n");
                 }
+                if (details.length() == 0) {
+                    details.append("Aucun détail trouvé pour ce programme.");
+                }
+                // Affichage des détails dans une boîte de dialogue
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Détails du Programme");
+                alert.setHeaderText(null);
+                alert.setContentText(details.toString());
+                alert.showAndWait();
+
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Erreur lors de la récupération des détails");
+                alert.setContentText("Une erreur s'est produite lors de la récupération des données du programme.");
+                alert.showAndWait();
+                e.printStackTrace();
             }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aucune sélection");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner un programme.");
+            alert.showAndWait();
         }
     }
 
@@ -419,64 +445,6 @@ public class CoachifyController {
         }
     }
 
-    @FXML
-    public void add_info_entreprise(ActionEvent event) {
-        // Récupérer les valeurs des champs
-        String phone = phoneE.getText();
-        String adresse = adresseE.getText();
-        String email = emailE.getText();
-
-        // Nouvelle entrée à ajouter (sans infosSupplementaires)
-        Map<String, Object> newEntry = new HashMap<>();
-        newEntry.put("phone", phone);
-        newEntry.put("adresse", adresse);
-        newEntry.put("email", email);
-
-        if (phone.isEmpty() || adresse.isEmpty() || email.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText(null);
-            alert.setContentText("Veuillez remplir tous les champs");
-            alert.showAndWait();
-        } else if (!email.matches("^(.+)@(.+)$")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText(null);
-            alert.setContentText("Veuillez entrer une adresse email valide");
-            alert.showAndWait();
-        }else{
-
-            // Spécifier le chemin du fichier JSON
-            String filePath = "src/main/resources/json/informations_entreprise.json";
-
-            try {
-                // Créer un ObjectMapper pour gérer le JSON
-                ObjectMapper objectMapper = new ObjectMapper();
-
-                // Créer une liste contenant uniquement la nouvelle entrée
-                List<Map<String, Object>> dataList = new ArrayList<>();
-                dataList.add(newEntry);
-
-                // Sauvegarder la nouvelle liste dans le fichier JSON, en remplaçant son contenu
-                objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), dataList);
-
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information");
-                alert.setHeaderText(null);
-                alert.setContentText("Informations ajoutées avec succes");
-                alert.showAndWait();
-            } catch (IOException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur");
-                alert.setHeaderText(null);
-                alert.setContentText("Impossible d'ajouter les informations");
-                alert.showAndWait();
-                e.printStackTrace();
-            }
-
-        }
-    }
 
     @FXML
     public void clean_added_exercices(ActionEvent event) {

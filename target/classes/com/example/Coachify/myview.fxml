@@ -89,7 +89,7 @@
                            <children>
                               <ListView fx:id="programList" layoutY="1.0" prefHeight="503.0" prefWidth="348.0" />
                               <Button layoutX="278.0" layoutY="475.0" mnemonicParsing="false" onAction="#view_more_prog" prefHeight="25.0" prefWidth="66.0" styleClass="add-button" text="voir plus" />
-                              <Button layoutX="3.0" layoutY="476.0" mnemonicParsing="false" onAction="#remove_selected_program" prefHeight="25.0" prefWidth="134.0" styleClass="remove-button" text="Retirer le programme" />
+                              <Button layoutX="3.0" layoutY="476.0" mnemonicParsing="false" onAction="#remove_selected_program" prefHeight="26.0" prefWidth="118.0" styleClass="remove-button" text="Retirer programme" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -103,7 +103,7 @@
                               <Button layoutX="441.0" layoutY="172.0" mnemonicParsing="false" onAction="#add_exercice_on_recept" prefHeight="26.0" prefWidth="82.0" styleClass="add-button" text="Ajouter" />
                               <ListView fx:id="temp_exerciceList" layoutX="3.0" layoutY="274.0" prefHeight="230.0" prefWidth="524.0" />
                               <Button layoutX="191.0" layoutY="239.0" mnemonicParsing="false" onAction="#generate_program" prefHeight="26.0" prefWidth="164.0" styleClass="add-button" text="Génerer le programme" />
-                              <Button layoutX="285.0" layoutY="466.0" mnemonicParsing="false" onAction="#clean_added_exercices" prefHeight="26.0" prefWidth="82.0" styleClass="remove-button" text="vider la liste" />
+                              <Button layoutX="444.0" layoutY="278.0" mnemonicParsing="false" onAction="#clean_added_exercices" prefHeight="23.0" prefWidth="80.0" styleClass="remove-button" text="vider la liste" />
                               <TextField fx:id="temp_sum" layoutX="368.0" layoutY="466.0" />
                               <ImageView fitHeight="91.0" fitWidth="94.0" layoutX="428.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -126,6 +126,7 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
                               <ListView fx:id="exerciceList" layoutX="10.0" layoutY="13.0" prefHeight="562.0" prefWidth="308.0" />
+                              <Button layoutX="14.0" layoutY="544.0" mnemonicParsing="false" onAction="#remove_selected_exercice" prefHeight="26.0" prefWidth="95.0" styleClass="remove-button" text="retirer exercice" />
                            </children>
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="417.0">
@@ -142,7 +143,6 @@
                               <Label layoutX="229.0" layoutY="281.0" text="repetitions" />
                               <TextField fx:id="repExercice" layoutX="229.0" layoutY="298.0" prefHeight="27.0" prefWidth="173.0" />
                               <Button fx:id="addExercice" layoutX="413.0" layoutY="251.0" mnemonicParsing="false" onAction="#add_exercice" prefHeight="75.0" prefWidth="129.0" styleClass="add-button" text="Ajouter un exercice" />
-                              <Button layoutX="11.0" layoutY="543.0" mnemonicParsing="false" onAction="#remove_selected_exercice" prefHeight="26.0" prefWidth="138.0" styleClass="remove-button" text="retirer l'exercice choisi" />
                               <ImageView fitHeight="91.0" fitWidth="94.0" layoutX="483.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../assets/logo.png" />
@@ -165,6 +165,7 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
                               <ListView fx:id="info_usersList" layoutX="10.0" layoutY="13.0" prefHeight="562.0" prefWidth="253.0" />
+                              <Button layoutX="13.0" layoutY="543.0" mnemonicParsing="false" onAction="#remove_user" prefHeight="28.0" prefWidth="108.0" styleClass="remove-button" text="Retirer utilisateur" />
                            </children>
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="417.0">
@@ -179,7 +180,6 @@
                                     <Font size="26.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="5.0" layoutY="550.0" mnemonicParsing="false" onAction="#remove_user" prefHeight="23.0" prefWidth="149.0" styleClass="remove-button" text="Retirer l'utilisateur choisi" />
                               <Button layoutX="543.0" layoutY="550.0" mnemonicParsing="false" onAction="#deconnexion" styleClass="remove-button" text="Déconnexion" />
                               <ImageView fitHeight="91.0" fitWidth="94.0" layoutX="539.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

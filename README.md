@@ -105,3 +105,15 @@ Les contributions sont **les bienvenues** ! 🛠
 4. **Pousser la branche** et ouvrir une **Pull Request**
 
 📩 Pour toute suggestion, n’hésite pas à ouvrir une issue !
+
+SCREENSHOTS/ 
+
+![{46EF5564-C942-43A3-9AAB-93CE04670855}](https://github.com/user-attachments/assets/e3fb520e-b201-41b0-996f-e6b824884476)
+
+![image](https://github.com/user-attachments/assets/98db2824-bf5a-4dbc-8804-60ddced17ca4)
+
+![image](https://github.com/user-attachments/assets/6ba88736-c7cb-4475-97b7-5ba40517dbba)
+
+![image](https://github.com/user-attachments/assets/607518d9-ac4f-4206-9293-601bd577f1e8)
+
+![image](https://github.com/user-attachments/assets/b540abfb-a123-44c2-acef-d23f27d1be1e)

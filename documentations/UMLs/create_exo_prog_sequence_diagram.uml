@@ -30,6 +30,12 @@ deactivate DB
 EM --> CC: Exercise Added
 deactivate EM
 
+CC --> User: Show Updated Exercise List
+deactivate CC
+
+User -> CC: Select Exercises and Add Program
+activate CC
+
 CC -> CC: generate_program()
 activate CC
 

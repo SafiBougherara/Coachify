@@ -1,0 +1,73 @@
+@startuml
+
+actor User
+participant "CoachifyController" as CC
+participant "ExerciceManager" as EM
+participant "ProgramManager" as PM
+participant "ExoProgManager" as EPM
+participant "BddManager" as BM
+database "Database" as DB
+
+User -> CC: Add Exercise
+activate CC
+
+CC -> CC: add_exercice()
+activate CC
+
+CC -> EM: addExercice(name, time, repExercice)
+activate EM
+
+EM -> BM: connect()
+activate BM
+BM --> EM: connection
+deactivate BM
+
+EM -> DB: Insert Exercise
+activate DB
+DB --> EM: Success
+deactivate DB
+
+EM --> CC: Exercise Added
+deactivate EM
+
+CC -> CC: generate_program()
+activate CC
+
+CC -> PM: addProgram(num, status, time, client_id)
+activate PM
+
+PM -> BM: connect()
+activate BM
+BM --> PM: connection
+deactivate BM
+
+PM -> DB: Insert Program
+activate DB
+DB --> PM: Success
+deactivate DB
+
+PM --> CC: Program Added
+deactivate PM
+
+CC -> EPM: addExoProg(exercice_id, program_id)
+activate EPM
+
+EPM -> BM: connect()
+activate BM
+BM --> EPM: connection
+deactivate BM
+
+EPM -> DB: Link Exercise to Program
+activate DB
+DB --> EPM: Success
+deactivate DB
+
+EPM --> CC: Exercise Linked to Program
+deactivate EPM
+
+CC -> CC: loadProgram()
+CC --> User: Show Updated Program List
+deactivate CC
+deactivate CC
+
+@enduml

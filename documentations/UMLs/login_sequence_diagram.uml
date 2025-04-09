@@ -1,0 +1,39 @@
+@startuml
+
+actor User
+participant "LoggerController" as LC
+participant "LoginManager" as LM
+participant "BddManager" as BM
+database "Database" as DB
+
+User -> LC: Enter username and password
+activate LC
+
+LC -> LC: checkconnection()
+activate LC
+LC -> LM: login(username, password)
+activate LM
+
+LM -> BM: connect()
+activate BM
+BM --> LM: connection
+deactivate BM
+
+LM -> DB: Execute SQL query
+activate DB
+DB --> LM: ResultSet
+deactivate DB
+
+LM --> LC: login result (boolean)
+deactivate LM
+
+alt login successful
+    LC -> LC: switchToMyView()
+    LC --> User: Show main application view
+else login failed
+    LC --> User: Show error message
+end
+deactivate LC
+deactivate LC
+
+@enduml

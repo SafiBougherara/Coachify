@@ -1,0 +1,49 @@
+@startuml
+
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <b>x</b>
+!define foreign_key(x) <u>x</u>
+
+table(users) {
+    primary_key(id) INT
+    username VARCHAR
+    password VARCHAR
+}
+
+table(clients) {
+    primary_key(id) INT
+    firstname VARCHAR
+    name VARCHAR
+    phone VARCHAR
+    adresse VARCHAR
+    email VARCHAR
+    birth_date DATE
+}
+
+table(exercices) {
+    primary_key(id) INT
+    name VARCHAR
+    time DOUBLE
+    repExercice INT
+}
+
+table(programs) {
+    primary_key(id) INT
+    num_program INT
+    status BOOLEAN
+    time DOUBLE
+    foreign_key(client_id) INT
+}
+
+table(exo_prog) {
+    primary_key(id) INT
+    foreign_key(exercice_id) INT
+    foreign_key(program_id) INT
+}
+
+' Relationships
+clients ||--o{ programs : has
+programs ||--o{ exo_prog : contains
+exercices ||--o{ exo_prog : included_in
+
+@enduml

@@ -1,0 +1,155 @@
+@startuml
+
+' Models
+class Client {
+  -String name
+  -String firstname
+  -String phone
+  -String adresse
+  -String email
+  -int id
+  -LocalDate birth_date
+  +Client(id: int, firstname: String, name: String, phone: String, adresse: String, email: String, birth_date: LocalDate)
+  +getName(): String
+  +getFirstname(): String
+  +getId(): int
+  +getPhone(): String
+  +getDate(): LocalDate
+  +getAdresse(): String
+  +getEmail(): String
+  +getBirth_date(): LocalDate
+  +toString(): String
+}
+
+class Exercice {
+  -String name
+  -double time
+  -int repExercice
+  -int id
+  +Exercice(name: String, time: double, id: int, repExercice: int)
+  +getName(): String
+  +getId(): int
+  +getTime(): double
+  +getRepExercice(): int
+  +toString(): String
+}
+
+class Program {
+  -int num_program
+  -boolean status
+  -double time
+  -int client_id
+  -int id
+  +Program(id: int, num_program: int, status: boolean, time: double, client_id: int)
+  +getId(): int
+  +getNum_program(): int
+  +getStatus(): boolean
+  +gettime(): double
+  +getClient_id(): int
+  +toString(): String
+}
+
+class User {
+  -String username
+  -String password
+  -int id
+  +User(id: int, username: String, password: String)
+  +getUsername(): String
+  +getPassword(): String
+  +getId(): int
+  +toString(): String
+}
+
+' Database Managers
+class BddManager {
+  +{static} String url
+  +{static} String username
+  +{static} String password
+  +{static} Connection connect()
+}
+
+class ClientManager {
+  +addClient(firstname: String, name: String, phone: String, adresse: String, email: String, birth_date: LocalDate)
+  +getAllClients(): ResultSet
+  +removeClient(id: int)
+}
+
+class ExerciceManager {
+  +addExercice(name: String, time: double, repExercice: int)
+  +getAllExercices(): ResultSet
+  +removeExercice(id: int)
+}
+
+class ExoProgManager {
+  +addExoProg(exercice_id: int, program_id: int)
+  +getAllExoProg(): ResultSet
+  +getExoProg(program_id: int): ResultSet
+  +removeExoProg(program_id: int)
+}
+
+class LoginManager {
+  +addUser(username: String, password: String)
+  +getAllUsers(): ResultSet
+  +removeUser(id: int)
+  +login(username: String, password: String): boolean
+  +getUserCount(): int
+}
+
+class ProgramManager {
+  +addProgram(num_program: int, status: boolean, time: double, client_id: int)
+  +getAllPrograms(): ResultSet
+  +getProgram(id: int): ResultSet
+  +removeProgram(id: int)
+  +updateStatus(id: int)
+}
+
+' Controllers
+class Coachify {
+  +start(stage: Stage)
+  +{static} main(args: String[])
+}
+
+class CoachifyController {
+  +initialize()
+  +checkFieldsOnRecept(): boolean
+  +load_client_program(e: Event)
+  +add_exercice_on_recept(event: ActionEvent)
+  +add_exercice(event: ActionEvent)
+  +loadExercices()
+  +add_client(event: ActionEvent)
+  +remove_selected_client(event: ActionEvent)
+  +view_more_prog(event: ActionEvent)
+  +loadClients()
+  +loadProgram()
+  +generate_program()
+  +add_user(event: ActionEvent)
+  +loadUser()
+  +remove_user(event: ActionEvent)
+  +deconnexion(event: ActionEvent)
+}
+
+class LoggerController {
+  +switchToMyView(event: ActionEvent)
+  +checkconnection(): boolean
+}
+
+' Relationships
+ClientManager --> Client
+ExerciceManager --> Exercice
+ProgramManager --> Program
+LoginManager --> User
+ExoProgManager --> Program
+ExoProgManager --> Exercice
+Program --> Client
+CoachifyController --> ClientManager
+CoachifyController --> ExerciceManager
+CoachifyController --> ProgramManager
+CoachifyController --> LoginManager
+LoggerController --> LoginManager
+ClientManager --|> BddManager
+ExerciceManager --|> BddManager
+ProgramManager --|> BddManager
+LoginManager --|> BddManager
+ExoProgManager --|> BddManager
+
+@enduml

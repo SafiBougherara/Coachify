@@ -1,0 +1,46 @@
+@startuml
+
+' Entities
+entity "User" as user {
+  * id : INT
+  --
+  username : VARCHAR
+  password : VARCHAR
+}
+
+entity "Client" as client {
+  * id : INT
+  --
+  firstname : VARCHAR
+  name : VARCHAR
+  phone : VARCHAR
+  adresse : VARCHAR
+  email : VARCHAR
+  birth_date : DATE
+}
+
+entity "Exercise" as exercise {
+  * id : INT
+  --
+  name : VARCHAR
+  time : DOUBLE
+  repExercice : INT
+}
+
+entity "Program" as program {
+  * id : INT
+  --
+  num_program : INT
+  status : BOOLEAN
+  time : DOUBLE
+}
+
+' Relationships
+client "1" -- "0..*" program : has >
+program "1" -- "0..*" exercise : contains >
+note bottom on link
+  Through exo_prog
+  junction table
+end note
+
+@enduml
